@@ -1,0 +1,1375 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login &amp; Signup - Adivasi Marketplace</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8f5f0;
+      color: #2a2520;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    .auth-container {
+      width: 100%;
+      min-height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: linear-gradient(135deg, #f8f5f0 0%, #ede5d8 100%);
+    }
+
+    /* Left Hero Section */
+    .hero-side {
+      background: linear-gradient(135deg, #2a2520 0%, #3d342e 100%);
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-side::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(200, 113, 55, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(212, 165, 116, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .tribal-pattern {
+      position: absolute;
+      font-size: 120px;
+      opacity: 0.04;
+      color: #d4a574;
+      pointer-events: none;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .pattern-1 { top: 10%; left: 10%; animation-delay: 0s; }
+    .pattern-2 { bottom: 15%; right: 10%; animation-delay: 3s; }
+    .pattern-3 { top: 50%; left: 5%; animation-delay: 6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .hero-illustration {
+      width: 280px;
+      height: 280px;
+      background: linear-gradient(135deg, #d4a574 0%, #c89968 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 140px;
+      margin-bottom: 40px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-illustration::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 3px solid rgba(212, 165, 116, 0.3);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-img-fallback {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      font-size: 140px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 2.5em;
+      font-weight: 800;
+      color: #d4a574;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .hero-description {
+      font-size: 1.15em;
+      color: #c8c8c8;
+      line-height: 1.7;
+    }
+
+    .hero-features {
+      display: flex;
+      gap: 25px;
+      margin-top: 40px;
+      justify-content: center;
+    }
+
+    .hero-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #d4a574;
+      font-size: 0.95em;
+      font-weight: 600;
+    }
+
+    .feature-icon {
+      font-size: 1.5em;
+    }
+
+    /* Right Form Section */
+    .form-side {
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .form-side::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, #c87137, #d4a574, #8b5a3c);
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .form-title {
+      font-size: 2.8em;
+      font-weight: 800;
+      color: #2a2520;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .form-subtitle {
+      font-size: 1.1em;
+      color: #6a5a4a;
+    }
+
+    /* Language Selector */
+    .language-selector {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .language-label {
+      display: block;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #6a5a4a;
+      margin-bottom: 10px;
+    }
+
+    .language-dropdown {
+      width: 100%;
+      padding: 12px 20px;
+      border: 2px solid #e8dfd0;
+      border-radius: 12px;
+      font-size: 1em;
+      font-family: inherit;
+      color: #2a2520;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23c87137' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 20px;
+      padding-right: 45px;
+    }
+
+    .language-dropdown:hover {
+      border-color: #c87137;
+    }
+
+    .language-dropdown:focus {
+      outline: none;
+      border-color: #c87137;
+      box-shadow: 0 0 0 4px rgba(200, 113, 55, 0.1);
+    }
+
+    /* Role Selector */
+    .role-selector {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 35px;
+      background: #f8f5f0;
+      padding: 8px;
+      border-radius: 50px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .role-btn {
+      flex: 1;
+      padding: 14px 28px;
+      background: transparent;
+      border: none;
+      border-radius: 50px;
+      font-size: 1em;
+      font-weight: 700;
+      color: #6a5a4a;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .role-btn.active {
+      background: linear-gradient(135deg, #c87137 0%, #d4a574 100%);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(200, 113, 55, 0.3);
+    }
+
+    /* Form Toggle */
+    .form-toggle {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 35px;
+      justify-content: center;
+    }
+
+    .toggle-link {
+      font-size: 1.05em;
+      font-weight: 600;
+      color: #6a5a4a;
+      cursor: pointer;
+      padding-bottom: 8px;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-link.active {
+      color: #c87137;
+      border-bottom-color: #c87137;
+    }
+
+    /* Form Styles */
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.95em;
+      font-weight: 600;
+      color: #2a2520;
+      margin-bottom: 10px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e8dfd0;
+      border-radius: 12px;
+      font-size: 1em;
+      font-family: inherit;
+      color: #2a2520;
+      background: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #c87137;
+      box-shadow: 0 0 0 4px rgba(200, 113, 55, 0.1);
+    }
+
+    .form-input::placeholder {
+      color: #a89a85;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3em;
+      color: #6a5a4a;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-password:hover {
+      color: #c87137;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .form-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #c87137;
+      border-radius: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: #c87137;
+    }
+
+    .checkbox-label {
+      font-size: 0.95em;
+      color: #6a5a4a;
+      line-height: 1.5;
+    }
+
+    .checkbox-label a {
+      color: #c87137;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .checkbox-label a:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, #c87137 0%, #d4a574 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(200, 113, 55, 0.3);
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 45px rgba(200, 113, 55, 0.5);
+    }
+
+    .submit-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .form-divider {
+      text-align: center;
+      margin: 30px 0;
+      position: relative;
+    }
+
+    .form-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #e8dfd0;
+    }
+
+    .divider-text {
+      position: relative;
+      background: #fff;
+      padding: 0 15px;
+      color: #6a5a4a;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+
+    .social-login {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-btn {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid #e8dfd0;
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 1.5em;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-btn:hover {
+      border-color: #c87137;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(200, 113, 55, 0.15);
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 0.95em;
+      color: #6a5a4a;
+    }
+
+    .form-footer a {
+      color: #c87137;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      display: none;
+      background: #fff5f5;
+      border: 1px solid #fed7d7;
+      color: #c53030;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
+    .success-message {
+      display: none;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .auth-container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        padding: 40px;
+        min-height: 400px;
+      }
+
+      .hero-illustration {
+        width: 200px;
+        height: 200px;
+        font-size: 100px;
+      }
+
+      .hero-title {
+        font-size: 2em;
+      }
+
+      .form-side {
+        padding: 40px 30px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-side {
+        padding: 30px 20px;
+        min-height: 300px;
+      }
+
+      .hero-illustration {
+        width: 150px;
+        height: 150px;
+        font-size: 75px;
+      }
+
+      .hero-title {
+        font-size: 1.6em;
+      }
+
+      .hero-description {
+        font-size: 1em;
+      }
+
+      .hero-features {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .form-side {
+        padding: 30px 20px;
+      }
+
+      .form-title {
+        font-size: 2em;
+      }
+
+      .role-selector {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .social-login {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="auth-container"><!-- Left Hero Section -->
+   <div class="hero-side">
+    <div class="tribal-pattern pattern-1">
+     🏺
+    </div>
+    <div class="tribal-pattern pattern-2">
+     💍
+    </div>
+    <div class="tribal-pattern pattern-3">
+     🎨
+    </div>
+    <div class="hero-content">
+     <div class="hero-illustration"><img src="log.png" alt="Tribal Artisan" class="hero-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="hero-img-fallback">
+       👥
+      </div>
+     </div>
+     <h1 class="hero-title" id="heroTitle">Authentic Handcrafted Treasures</h1>
+     <p class="hero-description" id="heroDescription">Connect with tribal artisans from across India. Buy unique handcrafted products or sell your authentic creations to the world.</p>
+     <div class="hero-features">
+      <div class="hero-feature-item"><span class="feature-icon">✨</span> <span>Authentic</span>
+      </div>
+      <div class="hero-feature-item"><span class="feature-icon">🤝</span> <span>Fair Trade</span>
+      </div>
+      <div class="hero-feature-item"><span class="feature-icon">🌿</span> <span>Eco-Friendly</span>
+      </div>
+     </div>
+    </div>
+   </div><!-- Right Form Section -->
+   <div class="form-side">
+    <div class="form-container">
+     <div class="form-header">
+      <h2 class="form-title" id="pageTitle">Welcome Back</h2>
+      <p class="form-subtitle" id="pageSubtitle">Access your artisan marketplace account</p>
+     </div><!-- Language Selector -->
+     <div class="language-selector"><label class="language-label">🌐 Language / भाषा / ଭାଷା</label> <select class="language-dropdown" id="languageSelect"> <option value="en">English</option> <option value="hi">हिन्दी (Hindi)</option> <option value="bn">বাংলা (Bengali)</option> <option value="od">ଓଡ଼ିଆ (Odia)</option> </select>
+     </div><!-- Role Selector -->
+     <div class="role-selector"><button class="role-btn active" data-role="buyer"> <span>🛍️</span> <span class="role-text">Buyer</span> </button> <button class="role-btn" data-role="seller"> <span>🏪</span> <span class="role-text">Seller</span> </button>
+     </div><!-- Form Toggle (Login/Signup) -->
+     <div class="form-toggle">
+      <div class="toggle-link active" data-form="login">
+       Login
+      </div>
+      <div class="toggle-link" data-form="signup">
+       Sign Up
+      </div>
+     </div><!-- Messages -->
+     <div class="error-message" id="errorMessage"></div>
+     <div class="success-message" id="successMessage"></div><!-- Buyer Login Form -->
+     <form class="auth-form active" id="buyerLoginForm">
+      <div class="form-group"><label class="form-label" for="buyerLoginEmail">Email Address</label> <input type="email" id="buyerLoginEmail" class="form-input" placeholder="your.email@example.com" required>
+      </div>
+      <div class="form-group"><label class="form-label" for="buyerLoginPassword">Password</label>
+       <div class="password-wrapper"><input type="password" id="buyerLoginPassword" class="form-input" placeholder="Enter your password" required> <button type="button" class="toggle-password" data-target="buyerLoginPassword">👁️</button>
+       </div>
+      </div>
+      <div class="form-footer" style="text-align: right; margin-top: -10px; margin-bottom: 20px;"><a href="#forgot">Forgot Password?</a>
+      </div><button type="submit" class="submit-btn">Login as Buyer</button>
+      <div class="form-divider"><span class="divider-text">Or continue with</span>
+      </div>
+      <div class="social-login"><button type="button" class="social-btn">📘</button> <button type="button" class="social-btn">🔍</button> <button type="button" class="social-btn">🍎</button>
+      </div>
+     </form><!-- Seller Login Form -->
+     <form class="auth-form" id="sellerLoginForm">
+      <div class="form-group"><label class="form-label" for="sellerLoginEmail">Email Address</label> <input type="email" id="sellerLoginEmail" class="form-input" placeholder="your.email@example.com" required>
+      </div>
+      <div class="form-group"><label class="form-label" for="sellerLoginPassword">Password</label>
+       <div class="password-wrapper"><input type="password" id="sellerLoginPassword" class="form-input" placeholder="Enter your password" required> <button type="button" class="toggle-password" data-target="sellerLoginPassword">👁️</button>
+       </div>
+      </div>
+      <div class="form-group"><label class="form-label" for="sellerStoreId">Store ID / Merchant Code (Optional)</label> <input type="text" id="sellerStoreId" class="form-input" placeholder="e.g., ADV-12345">
+      </div>
+      <div class="form-footer" style="text-align: right; margin-top: -10px; margin-bottom: 20px;"><a href="#forgot">Forgot Password?</a>
+      </div><button type="submit" class="submit-btn">Login as Seller</button>
+      <div class="form-divider"><span class="divider-text">Or continue with</span>
+      </div>
+      <div class="social-login"><button type="button" class="social-btn">📘</button> <button type="button" class="social-btn">🔍</button> <button type="button" class="social-btn">🍎</button>
+      </div>
+     </form><!-- Buyer Signup Form -->
+     <form class="auth-form" id="buyerSignupForm">
+      <div class="form-group"><label class="form-label" for="buyerSignupName">Full Name</label> <input type="text" id="buyerSignupName" class="form-input" placeholder="John Doe" required>
+      </div>
+      <div class="form-group"><label class="form-label" for="buyerSignupEmail">Email Address</label> <input type="email" id="buyerSignupEmail" class="form-input" placeholder="your.email@example.com" required>
+      </div>
+      <div class="form-group"><label class="form-label" for="buyerSignupPassword">Password</label>
+       <div class="password-wrapper"><input type="password" id="buyerSignupPassword" class="form-input" placeholder="Create a strong password" required> <button type="button" class="toggle-password" data-target="buyerSignupPassword">👁️</button>
+       </div>
+      </div>
+      <div class="form-group"><label class="form-label" for="buyerSignupConfirm">Confirm Password</label>
+       <div class="password-wrapper"><input type="password" id="buyerSignupConfirm" class="form-input" placeholder="Re-enter your password" required> <button type="button" class="toggle-password" data-target="buyerSignupConfirm">👁️</button>
+       </div>
+      </div>
+      <div class="checkbox-group"><input type="checkbox" id="buyerTerms" class="form-checkbox" required> <label class="checkbox-label" for="buyerTerms"> I agree to the <a href="#terms">Terms of Service</a> and <a href="#privacy">Privacy Policy</a> </label>
+      </div><button type="submit" class="submit-btn">Create Buyer Account</button>
+     </form><!-- Seller Signup Form -->
+     <form class="auth-form" id="sellerSignupForm">
+      <div class="form-group"><label class="form-label" for="sellerSignupName">Full Name</label> <input type="text" id="sellerSignupName" class="form-input" placeholder="Jane Smith" required>
+      </div>
+      <div class="form-group"><label class="form-label" for="sellerSignupEmail">Email Address</label> <input type="email" id="sellerSignupEmail" class="form-input" placeholder="your.email@example.com" required>
+      </div>
+      <div class="form-group"><label class="form-label" for="sellerStoreName">Store Name</label> <input type="text" id="sellerStoreName" class="form-input" placeholder="Your Artisan Store Name" required>
+      </div>
+      <div class="form-group"><label class="form-label" for="sellerSignupPassword">Password</label>
+       <div class="password-wrapper"><input type="password" id="sellerSignupPassword" class="form-input" placeholder="Create a strong password" required> <button type="button" class="toggle-password" data-target="sellerSignupPassword">👁️</button>
+       </div>
+      </div>
+      <div class="form-group"><label class="form-label" for="sellerSignupConfirm">Confirm Password</label>
+       <div class="password-wrapper"><input type="password" id="sellerSignupConfirm" class="form-input" placeholder="Re-enter your password" required> <button type="button" class="toggle-password" data-target="sellerSignupConfirm">👁️</button>
+       </div>
+      </div>
+      <div class="checkbox-group"><input type="checkbox" id="sellerTerms" class="form-checkbox" required> <label class="checkbox-label" for="sellerTerms"> I agree to the <a href="#terms">Terms of Service</a>, <a href="#privacy">Privacy Policy</a>, and <a href="#seller">Seller Agreement</a> </label>
+      </div><button type="submit" class="submit-btn">Create Seller Account</button>
+     </form>
+    </div>
+   </div>
+  </div>
+<script>
+    const defaultConfig = {
+      background_color: "#2a2520",
+      accent_color: "#c87137",
+      surface_color: "#f8f5f0",
+      text_color: "#2a2520",
+      secondary_color: "#d4a574",
+      font_family: "Inter",
+      font_size: 16,
+      page_title: "Welcome Back",
+      page_subtitle: "Access your artisan marketplace account",
+      hero_title: "Authentic Handcrafted Treasures",
+      hero_description: "Connect with tribal artisans from across India. Buy unique handcrafted products or sell your authentic creations to the world."
+    };
+
+    let currentRole = 'buyer';
+    let currentFormType = 'login';
+    let currentLanguage = 'en';
+
+    // Multi-language translations
+    const translations = {
+      en: {
+        buyer: "Customer",
+        seller: "Seller",
+        login: "Login",
+        signup: "Sign Up",
+        pageTitle: "Welcome Back",
+        pageSubtitle: "Access your artisan marketplace account",
+        heroTitle: "Authentic Handcrafted Treasures",
+        heroDescription: "Connect with tribal artisans from across India. Buy unique handcrafted products or sell your authentic creations to the world.",
+        emailLabel: "Email Address",
+        emailPlaceholder: "your.email@example.com",
+        passwordLabel: "Password",
+        passwordPlaceholder: "Enter your password",
+        createPasswordPlaceholder: "Create a strong password",
+        confirmPasswordLabel: "Confirm Password",
+        confirmPasswordPlaceholder: "Re-enter your password",
+        forgotPassword: "Forgot Password?",
+        loginBuyer: "Login as Customer",
+        loginSeller: "Login as Seller",
+        createBuyerAccount: "Create Customer Account",
+        createSellerAccount: "Create Seller Account",
+        orContinue: "Or continue with",
+        fullNameLabel: "Full Name",
+        fullNamePlaceholder: "John Doe",
+        storeNameLabel: "Store Name",
+        storeNamePlaceholder: "Your Artisan Store Name",
+        storeIdLabel: "Store ID / Merchant Code (Optional)",
+        storeIdPlaceholder: "e.g., ADV-12345",
+        termsText: "I agree to the",
+        termsLink: "Terms of Service",
+        andText: "and",
+        privacyLink: "Privacy Policy",
+        sellerAgreementLink: "Seller Agreement",
+        authentic: "Authentic",
+        fairTrade: "Fair Trade",
+        ecoFriendly: "Eco-Friendly"
+      },
+      hi: {
+        buyer: "ग्राहक",
+        seller: "विक्रेता",
+        login: "लॉगिन",
+        signup: "साइन अप",
+        pageTitle: "वापसी पर स्वागत है",
+        pageSubtitle: "अपने शिल्पकार बाज़ार खाते तक पहुंचें",
+        heroTitle: "प्रामाणिक हस्तनिर्मित खजाने",
+        heroDescription: "भारत भर के आदिवासी शिल्पकारों से जुड़ें। अद्वितीय हस्तनिर्मित उत्पाद खरीदें या अपनी प्रामाणिक कृतियों को दुनिया को बेचें।",
+        emailLabel: "ईमेल पता",
+        emailPlaceholder: "आपका.ईमेल@उदाहरण.com",
+        passwordLabel: "पासवर्ड",
+        passwordPlaceholder: "अपना पासवर्ड दर्ज करें",
+        createPasswordPlaceholder: "एक मजबूत पासवर्ड बनाएं",
+        confirmPasswordLabel: "पासवर्ड की पुष्टि करें",
+        confirmPasswordPlaceholder: "अपना पासवर्ड फिर से दर्ज करें",
+        forgotPassword: "पासवर्ड भूल गए?",
+        loginBuyer: "ग्राहक के रूप में लॉगिन करें",
+        loginSeller: "विक्रेता के रूप में लॉगिन करें",
+        createBuyerAccount: "ग्राहक खाता बनाएं",
+        createSellerAccount: "विक्रेता खाता बनाएं",
+        orContinue: "या जारी रखें",
+        fullNameLabel: "पूरा नाम",
+        fullNamePlaceholder: "राहुल शर्मा",
+        storeNameLabel: "दुकान का नाम",
+        storeNamePlaceholder: "आपकी शिल्पकार दुकान का नाम",
+        storeIdLabel: "दुकान आईडी / व्यापारी कोड (वैकल्पिक)",
+        storeIdPlaceholder: "उदा., ADV-12345",
+        termsText: "मैं इससे सहमत हूं",
+        termsLink: "सेवा की शर्तें",
+        andText: "और",
+        privacyLink: "गोपनीयता नीति",
+        sellerAgreementLink: "विक्रेता समझौता",
+        authentic: "प्रामाणिक",
+        fairTrade: "उचित व्यापार",
+        ecoFriendly: "पर्यावरण के अनुकूल"
+      },
+      bn: {
+        buyer: "গ্রাহক",
+        seller: "বিক্রেতা",
+        login: "লগইন",
+        signup: "সাইন আপ",
+        pageTitle: "স্বাগত জানাই",
+        pageSubtitle: "আপনার কারিগর বাজার অ্যাকাউন্ট অ্যাক্সেস করুন",
+        heroTitle: "প্রকৃত হস্তনির্মিত সম্পদ",
+        heroDescription: "ভারত জুড়ে উপজাতি কারিগরদের সাথে সংযুক্ত হন। অনন্য হস্তনির্মিত পণ্য কিনুন বা বিশ্বে আপনার প্রামাণিক সৃষ্টি বিক্রি করুন।",
+        emailLabel: "ইমেল ঠিকানা",
+        emailPlaceholder: "আপনার.ইমেল@উদাহরণ.com",
+        passwordLabel: "পাসওয়ার্ড",
+        passwordPlaceholder: "আপনার পাসওয়ার্ড লিখুন",
+        createPasswordPlaceholder: "একটি শক্তিশালী পাসওয়ার্ড তৈরি করুন",
+        confirmPasswordLabel: "পাসওয়ার্ড নিশ্চিত করুন",
+        confirmPasswordPlaceholder: "আপনার পাসওয়ার্ড পুনরায় লিখুন",
+        forgotPassword: "পাসওয়ার্ড ভুলে গেছেন?",
+        loginBuyer: "গ্রাহক হিসাবে লগইন করুন",
+        loginSeller: "বিক্রেতা হিসাবে লগইন করুন",
+        createBuyerAccount: "গ্রাহক অ্যাকাউন্ট তৈরি করুন",
+        createSellerAccount: "বিক্রেতা অ্যাকাউন্ট তৈরি করুন",
+        orContinue: "অথবা চালিয়ে যান",
+        fullNameLabel: "পুরো নাম",
+        fullNamePlaceholder: "রাহুল দাস",
+        storeNameLabel: "দোকানের নাম",
+        storeNamePlaceholder: "আপনার কারিগর দোকানের নাম",
+        storeIdLabel: "দোকান আইডি / ব্যবসায়ী কোড (ঐচ্ছিক)",
+        storeIdPlaceholder: "যেমন, ADV-12345",
+        termsText: "আমি এতে সম্মত",
+        termsLink: "সেবার শর্তাবলী",
+        andText: "এবং",
+        privacyLink: "গোপনীয়তা নীতি",
+        sellerAgreementLink: "বিক্রেতা চুক্তি",
+        authentic: "প্রকৃত",
+        fairTrade: "ন্যায্য বাণিজ্য",
+        ecoFriendly: "পরিবেশবান্ধব"
+      },
+      od: {
+        buyer: "ଗ୍ରାହକ",
+        seller: "ବିକ୍ରେତା",
+        login: "ଲଗଇନ୍",
+        signup: "ସାଇନ୍ ଅପ୍",
+        pageTitle: "ସ୍ୱାଗତ",
+        pageSubtitle: "ଆପଣଙ୍କ କାରିଗର ବଜାର ଖାତା ଆକ୍ସେସ୍ କରନ୍ତୁ",
+        heroTitle: "ପ୍ରାମାଣିକ ହସ୍ତନିର୍ମିତ ଭଣ୍ଡାର",
+        heroDescription: "ସମଗ୍ର ଭାରତରେ ଆଦିବାସୀ କାରିଗରମାନଙ୍କ ସହିତ ସଂଯୋଗ କରନ୍ତୁ। ଅନନ୍ୟ ହସ୍ତନିର୍ମିତ ଉତ୍ପାଦ କିଣନ୍ତୁ କିମ୍ବା ଆପଣଙ୍କର ପ୍ରାମାଣିକ ସୃଷ୍ଟିଗୁଡ଼ିକୁ ବିଶ୍ୱକୁ ବିକ୍ରି କରନ୍ତୁ।",
+        emailLabel: "ଇମେଲ୍ ଠିକଣା",
+        emailPlaceholder: "ଆପଣଙ୍କର.ଇମେଲ୍@ଉଦାହରଣ.com",
+        passwordLabel: "ପାସୱାର୍ଡ଼",
+        passwordPlaceholder: "ଆପଣଙ୍କର ପାସୱାର୍ଡ଼ ପ୍ରବେଶ କରନ୍ତୁ",
+        createPasswordPlaceholder: "ଏକ ଶକ୍ତିଶାଳୀ ପାସୱାର୍ଡ଼ ସୃଷ୍ଟି କରନ୍ତୁ",
+        confirmPasswordLabel: "ପାସୱାର୍ଡ଼ ନିଶ୍ଚିତ କରନ୍ତୁ",
+        confirmPasswordPlaceholder: "ଆପଣଙ୍କର ପାସୱାର୍ଡ଼ ପୁନର୍ବାର ପ୍ରବେଶ କରନ୍ତୁ",
+        forgotPassword: "ପାସୱାର୍ଡ଼ ଭୁଲିଗଲେ?",
+        loginBuyer: "ଗ୍ରାହକ ଭାବରେ ଲଗଇନ୍ କରନ୍ତୁ",
+        loginSeller: "ବିକ୍ରେତା ଭାବରେ ଲଗଇନ୍ କରନ୍ତୁ",
+        createBuyerAccount: "ଗ୍ରାହକ ଖାତା ସୃଷ୍ଟି କରନ୍ତୁ",
+        createSellerAccount: "ବିକ୍ରେତା ଖାତା ସୃଷ୍ଟି କରନ୍ତୁ",
+        orContinue: "କିମ୍ବା ଜାରି ରଖନ୍ତୁ",
+        fullNameLabel: "ପୂର୍ଣ୍ଣ ନାମ",
+        fullNamePlaceholder: "ରାହୁଲ ପାତ୍ର",
+        storeNameLabel: "ଦୋକାନ ନାମ",
+        storeNamePlaceholder: "ଆପଣଙ୍କର କାରିଗର ଦୋକାନ ନାମ",
+        storeIdLabel: "ଦୋକାନ ଆଇଡି / ବ୍ୟବସାୟୀ କୋଡ଼ (ବୈକଳ୍ପିକ)",
+        storeIdPlaceholder: "ଯେପରି, ADV-12345",
+        termsText: "ମୁଁ ସହମତ",
+        termsLink: "ସେବା ସର୍ତ୍ତାବଳୀ",
+        andText: "ଏବଂ",
+        privacyLink: "ଗୋପନୀୟତା ନୀତି",
+        sellerAgreementLink: "ବିକ୍ରେତା ଚୁକ୍ତି",
+        authentic: "ପ୍ରାମାଣିକ",
+        fairTrade: "ନ୍ୟାୟ ବାଣିଜ୍ୟ",
+        ecoFriendly: "ପରିବେଶ ଅନୁକୂଳ"
+      }
+    };
+
+    // Language selector functionality
+    document.getElementById('languageSelect').addEventListener('change', function() {
+      currentLanguage = this.value;
+      updateLanguage();
+    });
+
+    function updateLanguage() {
+      const t = translations[currentLanguage];
+
+      // Update page title and subtitle
+      document.getElementById('pageTitle').textContent = t.pageTitle;
+      document.getElementById('pageSubtitle').textContent = t.pageSubtitle;
+
+      // Update hero section
+      document.getElementById('heroTitle').textContent = t.heroTitle;
+      document.getElementById('heroDescription').textContent = t.heroDescription;
+
+      // Update role buttons
+      document.querySelectorAll('.role-btn').forEach((btn, index) => {
+        const roleText = btn.querySelector('.role-text');
+        roleText.textContent = index === 0 ? t.buyer : t.seller;
+      });
+
+      // Update form toggle
+      document.querySelectorAll('.toggle-link').forEach((link, index) => {
+        link.textContent = index === 0 ? t.login : t.signup;
+      });
+
+      // Update feature badges
+      const features = document.querySelectorAll('.hero-feature-item span:last-child');
+      features[0].textContent = t.authentic;
+      features[1].textContent = t.fairTrade;
+      features[2].textContent = t.ecoFriendly;
+
+      // Update all form labels and placeholders
+      updateFormTranslations(t);
+    }
+
+    function updateFormTranslations(t) {
+      // Buyer Login Form
+// Buyer Login Form - FIXED
+document.getElementById('buyerLoginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('buyerLoginEmail').value;  // ✅ Use email
+  const password = document.getElementById('buyerLoginPassword').value;
+  
+  if (email && password) {
+    await loginUser(email, password, 'buyer');
+  }
+});
+
+// Seller Login Form - FIXED  
+document.getElementById('sellerLoginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('sellerLoginEmail').value;  // ✅ Use email
+  const password = document.getElementById('sellerLoginPassword').value;
+  
+  if (email && password) {
+    await loginUser(email, password, 'seller');
+  }
+});
+
+      // Buyer Signup Form
+      document.querySelector('#buyerSignupForm label[for="buyerSignupName"]').textContent = t.fullNameLabel;
+      document.getElementById('buyerSignupName').placeholder = t.fullNamePlaceholder;
+      document.querySelector('#buyerSignupForm label[for="buyerSignupEmail"]').textContent = t.emailLabel;
+      document.getElementById('buyerSignupEmail').placeholder = t.emailPlaceholder;
+      document.querySelector('#buyerSignupForm label[for="buyerSignupPassword"]').textContent = t.passwordLabel;
+      document.getElementById('buyerSignupPassword').placeholder = t.createPasswordPlaceholder;
+      document.querySelector('#buyerSignupForm label[for="buyerSignupConfirm"]').textContent = t.confirmPasswordLabel;
+      document.getElementById('buyerSignupConfirm').placeholder = t.confirmPasswordPlaceholder;
+      
+      const buyerTermsLabel = document.querySelector('#buyerSignupForm .checkbox-label');
+      buyerTermsLabel.innerHTML = `${t.termsText} <a href="#terms">${t.termsLink}</a> ${t.andText} <a href="#privacy">${t.privacyLink}</a>`;
+      
+      document.querySelector('#buyerSignupForm .submit-btn').textContent = t.createBuyerAccount;
+
+      // Seller Signup Form
+      document.querySelector('#sellerSignupForm label[for="sellerSignupName"]').textContent = t.fullNameLabel;
+      document.getElementById('sellerSignupName').placeholder = t.fullNamePlaceholder;
+      document.querySelector('#sellerSignupForm label[for="sellerSignupEmail"]').textContent = t.emailLabel;
+      document.getElementById('sellerSignupEmail').placeholder = t.emailPlaceholder;
+      document.querySelector('#sellerSignupForm label[for="sellerStoreName"]').textContent = t.storeNameLabel;
+      document.getElementById('sellerStoreName').placeholder = t.storeNamePlaceholder;
+      document.querySelector('#sellerSignupForm label[for="sellerSignupPassword"]').textContent = t.passwordLabel;
+      document.getElementById('sellerSignupPassword').placeholder = t.createPasswordPlaceholder;
+      document.querySelector('#sellerSignupForm label[for="sellerSignupConfirm"]').textContent = t.confirmPasswordLabel;
+      document.getElementById('sellerSignupConfirm').placeholder = t.confirmPasswordPlaceholder;
+      
+      const sellerTermsLabel = document.querySelector('#sellerSignupForm .checkbox-label');
+      sellerTermsLabel.innerHTML = `${t.termsText} <a href="#terms">${t.termsLink}</a>, <a href="#privacy">${t.privacyLink}</a>, ${t.andText} <a href="#seller">${t.sellerAgreementLink}</a>`;
+      
+      document.querySelector('#sellerSignupForm .submit-btn').textContent = t.createSellerAccount;
+    }
+
+    // Role selector functionality
+    document.querySelectorAll('.role-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentRole = this.dataset.role;
+        updateForm();
+      });
+    });
+
+    // Form toggle functionality
+    document.querySelectorAll('.toggle-link').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.toggle-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        currentFormType = this.dataset.form;
+        updateForm();
+      });
+    });
+
+    function updateForm() {
+      document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
+      
+      const formId = `${currentRole}${currentFormType.charAt(0).toUpperCase() + currentFormType.slice(1)}Form`;
+      const targetForm = document.getElementById(formId);
+      if (targetForm) {
+        targetForm.classList.add('active');
+      }
+
+      hideMessages();
+    }
+
+    // Password toggle functionality
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const targetId = this.dataset.target;
+        const input = document.getElementById(targetId);
+        
+        if (input.type === 'password') {
+          input.type = 'text';
+          this.textContent = '👁️‍🗨️';
+        } else {
+          input.type = 'password';
+          this.textContent = '👁️';
+        }
+      });
+    });
+
+    // API Base URL
+    const API_BASE = '/api';
+
+    // Form submissions with API integration
+    document.getElementById('buyerLoginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('buyerLoginEmail').value;
+      const password = document.getElementById('buyerLoginPassword').value;
+      
+      if (username && password) {
+        await loginUser(username, password, 'customer');
+      }
+    });
+
+    document.getElementById('sellerLoginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('sellerLoginEmail').value;
+      const password = document.getElementById('sellerLoginPassword').value;
+      
+      if (username && password) {
+        await loginUser(username, password, 'seller');
+      }
+    });
+
+    document.getElementById('buyerSignupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('buyerSignupName').value;
+      const username = document.getElementById('buyerSignupEmail').value;
+      const password = document.getElementById('buyerSignupPassword').value;
+      const confirm = document.getElementById('buyerSignupConfirm').value;
+      const terms = document.getElementById('buyerTerms').checked;
+      
+      if (password !== confirm) {
+        showError('Passwords do not match. Please try again.');
+        return;
+      }
+      
+      if (!terms) {
+        showError('Please accept the Terms of Service to continue.');
+        return;
+      }
+      
+      if (name && username && password) {
+        await registerUser({
+  name: name,
+  email: username,
+  password: password,
+  role: 'buyer'
+});
+
+      }
+    });
+
+    document.getElementById('sellerSignupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('sellerSignupName').value;
+      const username = document.getElementById('sellerSignupEmail').value;
+      const storeName = document.getElementById('sellerStoreName').value;
+      const password = document.getElementById('sellerSignupPassword').value;
+      const confirm = document.getElementById('sellerSignupConfirm').value;
+      const terms = document.getElementById('sellerTerms').checked;
+      
+      if (password !== confirm) {
+        showError('Passwords do not match. Please try again.');
+        return;
+      }
+      
+      if (!terms) {
+        showError('Please accept the Terms, Privacy Policy, and Seller Agreement to continue.');
+        return;
+      }
+      
+      if (name && username && storeName && password) {
+        await registerUser({
+  name: name,
+  email: username,
+  password: password,
+  role: 'seller',
+  storeName: storeName
+});
+
+      }
+    });
+
+    // API Functions
+// API Functions - FIXED FIELD NAMES
+async function loginUser(email, password, role) {
+  try {
+    showSuccess('Logging in...');
+    
+    console.log("🔐 Sending login request with:", { email, password });
+    
+    const response = await fetch(`${API_BASE}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        email: email,        // ✅ Correct field name
+        password: password   // ✅ Correct field name
+      })
+    });
+
+    const data = await response.json();
+    console.log("📨 Login response:", data);
+
+    if (data.success) {
+      showSuccess('Login successful! Redirecting...');
+      
+      // Redirect based on user role from response
+      setTimeout(() => {
+        window.location.href = data.redirect;
+      }, 1500);
+    } else {
+      showError(data.error || 'Login failed. Please try again.');
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    showError('Network error. Please try again.');
+  }
+}
+    async function registerUser(userData) {
+      try {
+        showSuccess('Creating account...');
+
+        const response = await fetch(`${API_BASE}/signup`, {
+
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          showSuccess('Account created successfully! You can now login.');
+          // Switch to login form after successful registration
+          setTimeout(() => {
+            document.querySelectorAll('.toggle-link').forEach(l => l.classList.remove('active'));
+            document.querySelector('[data-form="login"]').classList.add('active');
+            currentFormType = 'login';
+            updateForm();
+          }, 2000);
+        } else {
+          showError(data.error || 'Registration failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Registration error:', error);
+        showError('Network error. Please try again.');
+      }
+    }
+
+    // Check if user is already logged in
+    async function checkAuthStatus() {
+      try {
+        const response = await fetch(`${API_BASE}/check-auth`, {
+          credentials: 'include'
+        });
+        
+        const data = await response.json();
+        
+        if (data.authenticated) {
+          // User is already logged in, redirect to appropriate dashboard
+          if (data.role === 'seller') {
+            window.location.href = '/sellerdashboard.html';
+          } else {
+            window.location.href = '/buydashboard.html';
+          }
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+      }
+    }
+
+    function showError(message) {
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+      
+      const successDiv = document.getElementById('successMessage');
+      successDiv.style.display = 'none';
+    }
+
+    function showSuccess(message) {
+      const successDiv = document.getElementById('successMessage');
+      successDiv.textContent = message;
+      successDiv.style.display = 'block';
+      
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.style.display = 'none';
+    }
+
+    function hideMessages() {
+      document.getElementById('errorMessage').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'none';
+    }
+
+    // Check authentication status when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAuthStatus();
+      updateLanguage(); // Initialize translations
+    });
+
+    // SDK Configuration (keep existing)
+    async function onConfigChange(config) {
+      const baseFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif';
+      const customFont = `${baseFont}, ${baseFontStack}`;
+      const baseSize = config.font_size || defaultConfig.font_size;
+
+      document.body.style.fontFamily = customFont;
+
+      // Apply colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      document.querySelector('.hero-side').style.background = `linear-gradient(135deg, ${bgColor} 0%, #3d342e 100%)`;
+      
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      document.querySelectorAll('.submit-btn').forEach(btn => {
+        btn.style.background = `linear-gradient(135deg, ${accentColor} 0%, #d4a574 100%)`;
+      });
+
+      document.querySelectorAll('.role-btn.active').forEach(btn => {
+        btn.style.background = `linear-gradient(135deg, ${accentColor} 0%, #d4a574 100%)`;
+      });
+
+      document.querySelectorAll('.form-input:focus').forEach(input => {
+        input.style.borderColor = accentColor;
+      });
+
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      document.querySelector('.role-selector').style.background = surfaceColor;
+
+      document.querySelectorAll('.form-title, .form-label').forEach(el => {
+        el.style.color = config.text_color || defaultConfig.text_color;
+      });
+
+      document.querySelectorAll('.hero-title, .hero-feature-item, .checkbox-label a, .form-footer a, .toggle-link.active').forEach(el => {
+        el.style.color = config.secondary_color || defaultConfig.secondary_color;
+      });
+
+      // Apply font sizes
+      document.querySelector('.form-title').style.fontSize = `${baseSize * 2.8}px`;
+      document.querySelector('.form-subtitle').style.fontSize = `${baseSize * 1.1}px`;
+      document.querySelector('.hero-title').style.fontSize = `${baseSize * 2.5}px`;
+      document.querySelector('.hero-description').style.fontSize = `${baseSize * 1.15}px`;
+
+      // Apply text content
+      document.getElementById('pageTitle').textContent = config.page_title || defaultConfig.page_title;
+      document.getElementById('pageSubtitle').textContent = config.page_subtitle || defaultConfig.page_subtitle;
+      document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('heroDescription').textContent = config.hero_description || defaultConfig.hero_description;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["page_title", config.page_title || defaultConfig.page_title],
+        ["page_subtitle", config.page_subtitle || defaultConfig.page_subtitle],
+        ["hero_title", config.hero_title || defaultConfig.hero_title],
+        ["hero_description", config.hero_description || defaultConfig.hero_description]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a492178b7c0d566',t:'MTc2NDE1NzQzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

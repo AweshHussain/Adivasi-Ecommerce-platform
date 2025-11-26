@@ -1,0 +1,2216 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adivasi Heritage - Luxury Dashboard</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #e8e6e3;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    .luxury-dashboard {
+      width: 100%;
+      min-height: 100%;
+      background: linear-gradient(180deg, #0a0a0a 0%, #1a1510 100%);
+    }
+
+    /* Top Header Bar */
+    .top-header {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(200, 180, 130, 0.15);
+      padding: 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 8px 32px rgba(200, 180, 130, 0.3);
+      transition: all 0.4s ease;
+    }
+
+    .brand-logo:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 48px rgba(200, 180, 130, 0.5);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c8b482 0%, #f4e4c1 50%, #c8b482 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 1px;
+    }
+
+    .brand-tagline {
+      font-size: 0.75em;
+      color: #8a8578;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .header-center {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 40px;
+    }
+
+    .luxury-search {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(30, 30, 30, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 50px;
+      padding: 14px 24px 14px 50px;
+      color: #e8e6e3;
+      font-size: 0.95em;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.4s ease;
+    }
+
+    .search-input::placeholder {
+      color: #6a6256;
+    }
+
+    .search-input:focus {
+      outline: none;
+      background: rgba(30, 30, 30, 0.9);
+      border-color: #c8b482;
+      box-shadow: 0 0 0 4px rgba(200, 180, 130, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8a8578;
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .language-selector {
+      position: relative;
+    }
+
+    .language-btn {
+      background: rgba(30, 30, 30, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 8px;
+      padding: 10px 18px;
+      color: #c8b482;
+      font-size: 0.9em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .language-btn:hover {
+      background: rgba(200, 180, 130, 0.1);
+      border-color: #c8b482;
+      transform: translateY(-2px);
+    }
+
+    .notification-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(30, 30, 30, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .notification-icon:hover {
+      background: rgba(200, 180, 130, 0.1);
+      border-color: #c8b482;
+      transform: translateY(-2px);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #0a0a0a;
+    }
+
+    .user-profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(30, 30, 30, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 50px;
+      padding: 8px 20px 8px 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .user-profile-btn:hover {
+      background: rgba(200, 180, 130, 0.1);
+      border-color: #c8b482;
+      transform: translateY(-2px);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+
+    .user-name {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #e8e6e3;
+    }
+
+    /* Main Content */
+    .dashboard-content {
+      padding: 60px;
+    }
+
+    /* Hero Welcome Section */
+    .hero-welcome {
+      background: linear-gradient(135deg, rgba(200, 180, 130, 0.15) 0%, rgba(160, 136, 80, 0.05) 100%);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 24px;
+      padding: 60px;
+      margin-bottom: 50px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-welcome::before {
+      content: '🏺';
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      font-size: 180px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-greeting {
+      font-size: 0.95em;
+      color: #8a8578;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c8b482 0%, #f4e4c1 50%, #c8b482 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15em;
+      color: #b8b0a0;
+      line-height: 1.6;
+      margin-bottom: 35px;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1em;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px rgba(200, 180, 130, 0.3);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 48px rgba(200, 180, 130, 0.5);
+    }
+
+    /* Metrics Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .metric-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      padding: 35px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #c8b482, #f4e4c1, #c8b482);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-8px);
+      background: rgba(30, 30, 30, 0.8);
+      border-color: #c8b482;
+      box-shadow: 0 16px 48px rgba(200, 180, 130, 0.2);
+    }
+
+    .metric-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .metric-icon {
+      width: 65px;
+      height: 65px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 25px;
+      transition: all 0.4s ease;
+    }
+
+    .metric-card:hover .metric-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .metric-icon.orders {
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.3);
+    }
+
+    .metric-icon.pending {
+      background: rgba(234, 179, 8, 0.1);
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .metric-icon.wishlist {
+      background: rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+    }
+
+    .metric-icon.spent {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .metric-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8em;
+      font-weight: 700;
+      color: #c8b482;
+      margin-bottom: 10px;
+    }
+
+    .metric-label {
+      font-size: 0.95em;
+      color: #8a8578;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 35px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      font-weight: 700;
+      color: #c8b482;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .view-all-link {
+      color: #8a8578;
+      text-decoration: none;
+      font-size: 0.95em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .view-all-link:hover {
+      color: #c8b482;
+      gap: 12px;
+    }
+
+    /* Recent Orders */
+    .orders-section {
+      margin-bottom: 60px;
+    }
+
+    .order-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .order-card:hover {
+      background: rgba(30, 30, 30, 0.8);
+      border-color: #c8b482;
+      transform: translateX(10px);
+      box-shadow: 0 8px 32px rgba(200, 180, 130, 0.15);
+    }
+
+    .order-image-container {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      flex-shrink: 0;
+    }
+
+    .order-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .order-card:hover .order-image {
+      transform: scale(1.15);
+    }
+
+    .order-details {
+      flex: 1;
+    }
+
+    .order-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25em;
+      font-weight: 600;
+      color: #e8e6e3;
+      margin-bottom: 10px;
+    }
+
+    .order-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.85em;
+      color: #8a8578;
+      margin-bottom: 12px;
+    }
+
+    .order-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-delivered {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .status-shipping {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .status-pending {
+      background: rgba(234, 179, 8, 0.15);
+      color: #eab308;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .order-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #c8b482;
+      margin-right: 30px;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .luxury-btn {
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.3);
+      color: #c8b482;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.85em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .luxury-btn:hover {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      border-color: #c8b482;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.3);
+    }
+
+    .luxury-btn.primary {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      border-color: #c8b482;
+    }
+
+    .luxury-btn.primary:hover {
+      box-shadow: 0 8px 32px rgba(200, 180, 130, 0.5);
+    }
+
+    /* Featured Products */
+    .products-carousel {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .product-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(200, 180, 130, 0.1) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      border-color: #c8b482;
+      box-shadow: 0 20px 60px rgba(200, 180, 130, 0.25);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    .product-image-wrapper {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      background: rgba(200, 180, 130, 0.05);
+      position: relative;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.15) rotate(2deg);
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(200, 180, 130, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    .wishlist-btn:hover {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      transform: scale(1.15);
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.4);
+    }
+
+    .product-info {
+      padding: 28px;
+    }
+
+    .product-category {
+      font-size: 0.8em;
+      color: #8a8578;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #e8e6e3;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stars {
+      color: #c8b482;
+      font-size: 0.95em;
+    }
+
+    .rating-count {
+      font-size: 0.85em;
+      color: #6a6256;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #c8b482;
+    }
+
+    .add-cart-btn {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.85em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .add-cart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.5);
+    }
+
+    /* Quick Actions */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .quick-action-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      padding: 35px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .quick-action-card:hover {
+      background: rgba(30, 30, 30, 0.8);
+      border-color: #c8b482;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(200, 180, 130, 0.2);
+    }
+
+    .quick-action-icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+      display: inline-block;
+      transition: transform 0.4s ease;
+    }
+
+    .quick-action-card:hover .quick-action-icon {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .quick-action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15em;
+      font-weight: 600;
+      color: #c8b482;
+      margin-bottom: 10px;
+    }
+
+    .quick-action-desc {
+      font-size: 0.85em;
+      color: #8a8578;
+      line-height: 1.5;
+    }
+
+    /* Luxury Footer */
+    .luxury-footer {
+      background: rgba(10, 10, 10, 0.95);
+      border-top: 1px solid rgba(200, 180, 130, 0.2);
+      margin-top: 80px;
+      padding: 80px 0 0 0;
+      position: relative;
+    }
+
+    .luxury-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c8b482, transparent);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .footer-logo {
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.2);
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c8b482 0%, #f4e4c1 50%, #c8b482 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 0.95em;
+      color: #8a8578;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .social-icon:hover {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      border-color: #c8b482;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.3);
+    }
+
+    .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15em;
+      font-weight: 700;
+      color: #c8b482;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .footer-links a {
+      color: #8a8578;
+      text-decoration: none;
+      font-size: 0.95em;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      display: inline-block;
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: #c8b482;
+      transition: width 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #c8b482;
+      padding-left: 8px;
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(200, 180, 130, 0.15);
+      padding: 35px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .copyright {
+      font-size: 0.9em;
+      color: #6a6256;
+      font-weight: 300;
+    }
+
+    .footer-legal {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .footer-legal a {
+      color: #8a8578;
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.3s ease;
+      font-weight: 400;
+    }
+
+    .footer-legal a:hover {
+      color: #c8b482;
+    }
+
+    .footer-legal .separator {
+      color: #4a4236;
+      font-size: 0.7em;
+    }
+
+    .footer-badges {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .badge-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(200, 180, 130, 0.08);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .badge-item:hover {
+      background: rgba(200, 180, 130, 0.15);
+      border-color: rgba(200, 180, 130, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .badge-icon {
+      font-size: 18px;
+    }
+
+    .badge-text {
+      font-size: 0.8em;
+      color: #c8b482;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .dashboard-content {
+        padding: 40px;
+      }
+
+      .hero-welcome {
+        padding: 40px;
+      }
+
+      .hero-title {
+        font-size: 2.8em;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-header {
+        padding: 15px 25px;
+        flex-wrap: wrap;
+      }
+
+      .brand-logo {
+        width: 50px;
+        height: 50px;
+        font-size: 26px;
+      }
+
+      .brand-name {
+        font-size: 1.4em;
+      }
+
+      .header-center {
+        order: 3;
+        width: 100%;
+        margin: 20px 0 0 0;
+      }
+
+      .dashboard-content {
+        padding: 25px;
+      }
+
+      .hero-welcome {
+        padding: 30px;
+      }
+
+      .hero-title {
+        font-size: 2em;
+      }
+
+      .hero-subtitle {
+        font-size: 1em;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .order-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .order-price {
+        margin: 15px 0;
+      }
+
+      .order-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .luxury-btn {
+        width: 100%;
+      }
+
+      .products-carousel {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 1.6em;
+      }
+
+      .footer-content {
+        padding: 0 25px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-badges {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .badge-item {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-bottom-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 1.8em;
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .user-name {
+        display: none;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="luxury-dashboard"><!-- Top Header -->
+<header class="top-header">
+    <div class="brand-section">
+        <div class="brand-logo">🏺</div>
+        <div class="brand-text">
+            <div class="brand-name" id="brandName">Adivasi Heritage</div>
+            <div class="brand-tagline" data-translate="tagline">Artisan Crafted Excellence</div>
+        </div>
+    </div>
+    <div class="header-center">
+        <div class="luxury-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchInput" data-translate-placeholder="searchPlaceholder" placeholder="Search for authentic handcrafted treasures...">
+        </div>
+    </div>
+<div class="header-right">
+    <div class="language-selector">
+        <select class="language-btn" id="languageSelector">
+            <option value="en">🌐 English</option>
+            <option value="hi">🌐 हिन्दी</option>
+            <option value="ta">🌐 தமிழ்</option>
+            <option value="bn">🌐 বাংলা</option>
+        </select>
+    </div>
+    <div class="notification-icon">
+        🔔 <span class="notification-badge">5</span>
+    </div>
+    <a href="profilebuyer.html" class="user-profile-btn">
+        <div class="user-avatar">{{ user_name[0] }}{{ user_name.split(' ')[-1][0] if ' ' in user_name else '' }}</div>
+        <span class="user-name">{{ user_name }}</span>
+    </a>
+</div>
+
+      <div class="user-avatar">
+       AR
+      </div><span class="user-name" data-translate="userName">Arjun Reddy</span>
+     </div>
+    </div>
+   </header><!-- Main Dashboard Content -->
+   <main class="dashboard-content"><!-- Hero Welcome Section -->
+    <section class="hero-welcome">
+     <div class="hero-content">
+      <div class="hero-greeting" data-translate="greeting">
+       Good Evening
+      </div>
+     <h1 class="hero-title" id="welcomeTitle">Welcome Back, {{ user_name.split(' ')[0] }}</h1>
+      <p class="hero-subtitle" id="welcomeSubtitle">Discover timeless treasures crafted by indigenous artisans. Each piece tells a story of heritage, tradition, and unparalleled craftsmanship.</p><button class="hero-cta" id="heroCta"> <span data-translate="exploreCta">Explore New Collection</span> <span>→</span> </button>
+     </div>
+    </section><!-- Metrics Cards -->
+    <div class="metrics-grid">
+     <div class="metric-card">
+      <div class="metric-icon orders">
+       📦
+      </div>
+      <div class="metric-value">
+       47
+      </div>
+      <div class="metric-label" data-translate="totalOrders">
+       Total Orders
+      </div>
+     </div>
+     <div class="metric-card">
+      <div class="metric-icon pending">
+       ��
+      </div>
+      <div class="metric-value">
+       5
+      </div>
+      <div class="metric-label" data-translate="pendingDeliveries">
+       Pending Deliveries
+      </div>
+     </div>
+     <div class="metric-card">
+      <div class="metric-icon wishlist">
+       💎
+      </div>
+      <div class="metric-value">
+       28
+      </div>
+      <div class="metric-label" data-translate="wishlistItems">
+       Wishlist Items
+      </div>
+     </div>
+     <div class="metric-card">
+      <div class="metric-icon spent">
+       💰
+      </div>
+      <div class="metric-value">
+       ₹1,24,500
+      </div>
+      <div class="metric-label" data-translate="totalSpent">
+       Total Spent
+      </div>
+     </div>
+    </div><!-- Recent Orders Section -->
+    <section class="orders-section">
+     <div class="section-header">
+      <h2 class="section-title"><span>📋</span> <span data-translate="recentOrders">Recent Orders</span></h2><a href="#" class="view-all-link"> <span data-translate="viewAll">View All</span> <span>→</span> </a>
+     </div>
+     <div class="order-card">
+      <div class="order-image-container"><img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400" alt="Tribal Basket" class="order-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px\'>🧺</div>';">
+      </div>
+      <div class="order-details">
+       <div class="order-name" data-translate="product1">
+        Handwoven Tribal Basket Collection
+       </div>
+       <div class="order-meta"><span data-translate="orderNum">Order #ADV-2847</span> <span>•</span> <span data-translate="orderDate1">December 18, 2024</span>
+       </div><span class="order-status status-shipping"> <span>🚚</span> <span data-translate="statusShipping">In Transit</span> </span>
+      </div>
+      <div class="order-price">
+       ₹8,499
+      </div>
+      <div class="order-actions"><button class="luxury-btn primary" data-translate="trackOrder">Track Order</button>
+      </div>
+     </div>
+     <div class="order-card">
+      <div class="order-image-container"><img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400" alt="Pottery" class="order-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px\'>🏺</div>';">
+      </div>
+      <div class="order-details">
+       <div class="order-name" data-translate="product2">
+        Artisan Terracotta Pottery Set
+       </div>
+       <div class="order-meta"><span data-translate="orderNum2">Order #ADV-2846</span> <span>•</span> <span data-translate="orderDate2">December 15, 2024</span>
+       </div><span class="order-status status-delivered"> <span>✓</span> <span data-translate="statusDelivered">Delivered</span> </span>
+      </div>
+      <div class="order-price">
+       ₹12,999
+      </div>
+      <div class="order-actions"><button class="luxury-btn primary" data-translate="buyAgain">Buy Again</button> <button class="luxury-btn" data-translate="review">Write Review</button>
+      </div>
+     </div>
+     <div class="order-card">
+      <div class="order-image-container"><img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400" alt="Jewelry" class="order-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px\'>💍</div>';">
+      </div>
+      <div class="order-details">
+       <div class="order-name" data-translate="product3">
+        Traditional Tribal Jewelry Collection
+       </div>
+       <div class="order-meta"><span data-translate="orderNum3">Order #ADV-2845</span> <span>•</span> <span data-translate="orderDate3">December 10, 2024</span>
+       </div><span class="order-status status-delivered"> <span>✓</span> <span data-translate="statusDelivered">Delivered</span> </span>
+      </div>
+      <div class="order-price">
+       ₹18,999
+      </div>
+      <div class="order-actions"><button class="luxury-btn primary" data-translate="buyAgain">Buy Again</button> <button class="luxury-btn" data-translate="review">Write Review</button>
+      </div>
+     </div>
+    </section><!-- Featured Products -->
+    <section>
+     <div class="section-header">
+      <h2 class="section-title"><span>✨</span> <span data-translate="featuredProducts">Featured Products</span></h2><a href="#" class="view-all-link"> <span data-translate="viewAll">View All</span> <span>→</span> </a>
+     </div>
+     <div class="products-carousel">
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=500" alt="Wall Art" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>🎨</div>';"> <button class="wishlist-btn">🤍</button>
+       </div>
+       <div class="product-info">
+        <div class="product-category" data-translate="categoryDecor">
+         Wall Décor
+        </div>
+        <div class="product-name" data-translate="productName1">
+         Bamboo Tribal Wall Art
+        </div>
+        <div class="product-rating"><span class="stars">��⭐⭐⭐⭐</span> <span class="rating-count">(128)</span>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹6,999
+         </div><button class="add-cart-btn" data-translate="addToCart">Add to Cart</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=500" alt="Basket" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>🧺</div>';"> <button class="wishlist-btn">🤍</button>
+       </div>
+       <div class="product-info">
+        <div class="product-category" data-translate="categoryStorage">
+         Home Storage
+        </div>
+        <div class="product-name" data-translate="productName2">
+         Handwoven Premium Basket
+        </div>
+        <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="rating-count">(94)</span>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹4,499
+         </div><button class="add-cart-btn" data-translate="addToCart">Add to Cart</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=500" alt="Pottery" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>🏺</div>';"> <button class="wishlist-btn">🤍</button>
+       </div>
+       <div class="product-info">
+        <div class="product-category" data-translate="categoryPottery">
+         Pottery
+        </div>
+        <div class="product-name" data-translate="productName3">
+         Handmade Clay Vase Set
+        </div>
+        <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="rating-count">(156)</span>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹9,999
+         </div><button class="add-cart-btn" data-translate="addToCart">Add to Cart</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=500" alt="Jewelry" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>💍</div>';"> <button class="wishlist-btn">🤍</button>
+       </div>
+       <div class="product-info">
+        <div class="product-category" data-translate="categoryJewelry">
+         Jewelry
+        </div>
+        <div class="product-name" data-translate="productName4">
+         Heritage Tribal Necklace
+        </div>
+        <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="rating-count">(203)</span>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹14,999
+         </div><button class="add-cart-btn" data-translate="addToCart">Add to Cart</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Quick Actions -->
+    <section style="margin-top: 60px;">
+     <div class="section-header">
+      <h2 class="section-title"><span>⚡</span> <span data-translate="quickActions">Quick Actions</span></h2>
+     </div>
+     <div class="quick-actions-grid">
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        🛍️
+       </div>
+       <div class="quick-action-title" data-translate="actionBrowse">
+        Browse Categories
+       </div>
+       <div class="quick-action-desc" data-translate="actionBrowseDesc">
+        Explore our curated collections
+       </div>
+      </div>
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        📍
+       </div>
+       <div class="quick-action-title" data-translate="actionTrack">
+        Track Orders
+       </div>
+       <div class="quick-action-desc" data-translate="actionTrackDesc">
+        Monitor your delivery status
+       </div>
+      </div>
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        💬
+       </div>
+       <div class="quick-action-title" data-translate="actionContact">
+        Contact Artisans
+       </div>
+       <div class="quick-action-desc" data-translate="actionContactDesc">
+        Connect with master craftsmen
+       </div>
+      </div>
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        🎁
+       </div>
+       <div class="quick-action-title" data-translate="actionGifts">
+        Premium Gifts
+       </div>
+       <div class="quick-action-desc" data-translate="actionGiftsDesc">
+        Curated gift collections
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Luxury Footer -->
+   <footer class="luxury-footer">
+    <div class="footer-content">
+     <div class="footer-grid"><!-- Brand Column -->
+      <div class="footer-column">
+       <div class="footer-brand">
+        <div class="footer-logo">
+         🏺
+        </div>
+        <div class="footer-brand-name" id="footerBrandName">
+         Adivasi Heritage
+        </div>
+       </div>
+       <p class="footer-tagline" data-translate="footerTagline">Preserving ancient craftsmanship for modern elegance. Each piece is a masterwork of tradition and artistry.</p>
+       <div class="footer-social"><a href="#" class="social-icon">📘</a> <a href="#" class="social-icon">📷</a> <a href="#" class="social-icon">🐦</a> <a href="#" class="social-icon">📌</a>
+       </div>
+      </div><!-- Shop Column -->
+      <div class="footer-column">
+       <h3 class="footer-title" data-translate="footerShop">Shop</h3>
+       <ul class="footer-links">
+        <li><a href="#" data-translate="footerNewArrivals">New Arrivals</a></li>
+        <li><a href="#" data-translate="footerBestsellers">Bestsellers</a></li>
+        <li><a href="#" data-translate="footerCollections">Collections</a></li>
+        <li><a href="#" data-translate="footerArtisans">Featured Artisans</a></li>
+        <li><a href="#" data-translate="footerGiftSets">Gift Sets</a></li>
+       </ul>
+      </div><!-- Support Column -->
+      <div class="footer-column">
+       <h3 class="footer-title" data-translate="footerSupport">Support</h3>
+       <ul class="footer-links">
+        <li><a href="#" data-translate="footerContact">Contact Us</a></li>
+        <li><a href="#" data-translate="footerShipping">Shipping Info</a></li>
+        <li><a href="#" data-translate="footerReturns">Returns &amp; Exchanges</a></li>
+        <li><a href="#" data-translate="footerFAQ">FAQ</a></li>
+        <li><a href="#" data-translate="footerCare">Product Care</a></li>
+       </ul>
+      </div><!-- About Column -->
+      <div class="footer-column">
+       <h3 class="footer-title" data-translate="footerAbout">About</h3>
+       <ul class="footer-links">
+        <li><a href="#" data-translate="footerStory">Our Story</a></li>
+        <li><a href="#" data-translate="footerCommunity">Artisan Community</a></li>
+        <li><a href="#" data-translate="footerSustainability">Sustainability</a></li>
+        <li><a href="#" data-translate="footerBlog">Blog</a></li>
+        <li><a href="#" data-translate="footerCareers">Careers</a></li>
+       </ul>
+      </div>
+     </div><!-- Footer Bottom -->
+     <div class="footer-bottom">
+      <div class="footer-bottom-content">
+       <p class="copyright" data-translate="footerCopyright">© 2024 Adivasi Heritage. All rights reserved.</p>
+       <div class="footer-legal"><a href="#" data-translate="footerPrivacy">Privacy Policy</a> <span class="separator">•</span> <a href="#" data-translate="footerTerms">Terms of Service</a> <span class="separator">•</span> <a href="#" data-translate="footerCookies">Cookie Policy</a>
+       </div>
+      </div>
+      <div class="footer-badges">
+       <div class="badge-item"><span class="badge-icon">🔒</span> <span class="badge-text" data-translate="footerSecure">Secure Payments</span>
+       </div>
+       <div class="badge-item"><span class="badge-icon">✓</span> <span class="badge-text" data-translate="footerAuthentic">100% Authentic</span>
+       </div>
+       <div class="badge-item"><span class="badge-icon">🌍</span> <span class="badge-text" data-translate="footerShipping">Worldwide Shipping</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+<script>
+    // User data from server (passed from Flask)
+    const userData = {
+        name: "{{ user_name }}",
+        email: "{{ user_email }}",
+        role: "{{ user_role }}"
+    };
+
+    // API base URL
+    const API_BASE = '/api';
+
+    const defaultConfig = {
+      background_color: "#0a0a0a",
+      accent_color: "#c8b482",
+      surface_color: "#1a1510",
+      text_color: "#e8e6e3",
+      secondary_color: "#8a8578",
+      font_family: "Inter",
+      font_size: 16,
+      brand_name: "Adivasi Heritage",
+      welcome_title: "Welcome Back, Arjun",
+      welcome_subtitle: "Discover timeless treasures crafted by indigenous artisans. Each piece tells a story of heritage, tradition, and unparalleled craftsmanship.",
+      hero_cta: "Explore New Collection"
+    };
+
+    // Multilingual translations
+    const translations = {
+      en: {
+        tagline: "Artisan Crafted Excellence",
+        searchPlaceholder: "Search for authentic handcrafted treasures...",
+        userName: "Arjun Reddy",
+        greeting: "Good Evening",
+        exploreCta: "Explore New Collection",
+        totalOrders: "Total Orders",
+        pendingDeliveries: "Pending Deliveries",
+        wishlistItems: "Wishlist Items",
+        totalSpent: "Total Spent",
+        recentOrders: "Recent Orders",
+        viewAll: "View All",
+        product1: "Handwoven Tribal Basket Collection",
+        product2: "Artisan Terracotta Pottery Set",
+        product3: "Traditional Tribal Jewelry Collection",
+        orderNum: "Order #ADV-2847",
+        orderNum2: "Order #ADV-2846",
+        orderNum3: "Order #ADV-2845",
+        orderDate1: "December 18, 2024",
+        orderDate2: "December 15, 2024",
+        orderDate3: "December 10, 2024",
+        statusShipping: "In Transit",
+        statusDelivered: "Delivered",
+        trackOrder: "Track Order",
+        buyAgain: "Buy Again",
+        review: "Write Review",
+        featuredProducts: "Featured Products",
+        categoryDecor: "Wall Décor",
+        categoryStorage: "Home Storage",
+        categoryPottery: "Pottery",
+        categoryJewelry: "Jewelry",
+        productName1: "Bamboo Tribal Wall Art",
+        productName2: "Handwoven Premium Basket",
+        productName3: "Handmade Clay Vase Set",
+        productName4: "Heritage Tribal Necklace",
+        addToCart: "Add to Cart",
+        quickActions: "Quick Actions",
+        actionBrowse: "Browse Categories",
+        actionBrowseDesc: "Explore our curated collections",
+        actionTrack: "Track Orders",
+        actionTrackDesc: "Monitor your delivery status",
+        actionContact: "Contact Artisans",
+        actionContactDesc: "Connect with master craftsmen",
+        actionGifts: "Premium Gifts",
+        actionGiftsDesc: "Curated gift collections",
+        footerTagline: "Preserving ancient craftsmanship for modern elegance. Each piece is a masterwork of tradition and artistry.",
+        footerShop: "Shop",
+        footerNewArrivals: "New Arrivals",
+        footerBestsellers: "Bestsellers",
+        footerCollections: "Collections",
+        footerArtisans: "Featured Artisans",
+        footerGiftSets: "Gift Sets",
+        footerSupport: "Support",
+        footerContact: "Contact Us",
+        footerShipping: "Shipping Info",
+        footerReturns: "Returns & Exchanges",
+        footerFAQ: "FAQ",
+        footerCare: "Product Care",
+        footerAbout: "About",
+        footerStory: "Our Story",
+        footerCommunity: "Artisan Community",
+        footerSustainability: "Sustainability",
+        footerBlog: "Blog",
+        footerCareers: "Careers",
+        footerCopyright: "© 2024 Adivasi Heritage. All rights reserved.",
+        footerPrivacy: "Privacy Policy",
+        footerTerms: "Terms of Service",
+        footerCookies: "Cookie Policy",
+        footerSecure: "Secure Payments",
+        footerAuthentic: "100% Authentic",
+        footerShippingBadge: "Worldwide Shipping"
+      },
+      hi: {
+        tagline: "कारीगर निर्मित उत्कृष्टता",
+        searchPlaceholder: "प्रामाणिक हस्तनिर्मित खजाने खोजें...",
+        userName: "अर्जुन रेड्डी",
+        greeting: "शुभ संध्या",
+        exploreCta: "नया संग्रह देखें",
+        totalOrders: "कुल ऑर्डर",
+        pendingDeliveries: "लंबित डिलीवरी",
+        wishlistItems: "पसंदीदा वस्तुएं",
+        totalSpent: "कुल खर्च",
+        recentOrders: "हाल के ऑर्डर",
+        viewAll: "सभी देखें",
+        product1: "हस्तनिर्मित आदिवासी टोकरी संग्रह",
+        product2: "कारीगर टेराकोटा बर्तन सेट",
+        product3: "पारंपरिक आदिवासी आभूषण संग्रह",
+        orderNum: "ऑर्डर #ADV-2847",
+        orderNum2: "ऑर्डर #ADV-2846",
+        orderNum3: "ऑर्डर #ADV-2845",
+        orderDate1: "18 दिसंबर, 2024",
+        orderDate2: "15 दिसंबर, 2024",
+        orderDate3: "10 दिसंबर, 2024",
+        statusShipping: "ट्रांज़िट में",
+        statusDelivered: "डिलीवर किया गया",
+        trackOrder: "ऑर्डर ट्रैक करें",
+        buyAgain: "फिर से खरीदें",
+        review: "समीक्षा लिखें",
+        featuredProducts: "विशेष उत्पाद",
+        categoryDecor: "दीवार सजावट",
+        categoryStorage: "होम स्टोरेज",
+        categoryPottery: "मिट्टी के बर्तन",
+        categoryJewelry: "आभूषण",
+        productName1: "बांस की आदिवासी दीवार कला",
+        productName2: "हस्तनिर्मित प्रीमियम टोकरी",
+        productName3: "हस्तनिर्मित मिट्टी के फूलदान सेट",
+        productName4: "विरासत आदिवासी हार",
+        addToCart: "कार्ट में जोड़ें",
+        quickActions: "त्वरित कार्रवाई",
+        actionBrowse: "श्रेणियां ब्राउज़ करें",
+        actionBrowseDesc: "हमारे क्यूरेटेड संग्रह देखें",
+        actionTrack: "ऑर्डर ट्रैक करें",
+        actionTrackDesc: "अपनी डिलीवरी स्थिति देखें",
+        actionContact: "कारीगरों से संपर्क करें",
+        actionContactDesc: "मास्टर शिल्पकारों से जुड़ें",
+        actionGifts: "प्रीमियम उपहार",
+        actionGiftsDesc: "क्यूरेटेड उपहार संग्रह",
+        footerTagline: "आधुनिक शान के लिए प्राचीन शिल्प कौशल का संरक्षण। प्रत्येक टुकड़ा परंपरा और कलात्मकता की एक उत्कृष्ट कृति है।",
+        footerShop: "खरीदारी करें",
+        footerNewArrivals: "नए आगमन",
+        footerBestsellers: "बेस्टसेलर",
+        footerCollections: "संग्रह",
+        footerArtisans: "प्रमुख कारीगर",
+        footerGiftSets: "उपहार सेट",
+        footerSupport: "सहायता",
+        footerContact: "संपर्क करें",
+        footerShipping: "शिपिंग जानकारी",
+        footerReturns: "रिटर्न और एक्सचेंज",
+        footerFAQ: "पूछे जाने वाले प्रश्न",
+        footerCare: "उत्पाद देखभाल",
+        footerAbout: "हमारे बारे में",
+        footerStory: "हमारी कहानी",
+        footerCommunity: "कारीगर समुदाय",
+        footerSustainability: "स्थिरता",
+        footerBlog: "ब्लॉग",
+        footerCareers: "करियर",
+        footerCopyright: "© 2024 आदिवासी विरासत। सर्वाधिकार सुरक्षित।",
+        footerPrivacy: "गोपनीयता नीति",
+        footerTerms: "सेवा की शर्तें",
+        footerCookies: "कुकी नीति",
+        footerSecure: "सुरक्षित भुगतान",
+        footerAuthentic: "100% प्रामाणिक",
+        footerShippingBadge: "विश्वव्यापी शिपिंग"
+      },
+      ta: {
+        tagline: "கைவினைஞர் உருவாக்கிய சிறப்பு",
+        searchPlaceholder: "நம்பகமான கைவினை பொக்கிஷங்களைத் தேடுங்கள்...",
+        userName: "அர்ஜுன் ரெட்டி",
+        greeting: "இனிய மாலை வணக்கம்",
+        exploreCta: "புதிய சேகரிப்பைக் காண்க",
+        totalOrders: "மொத்த ஆர்டர்கள்",
+        pendingDeliveries: "நிலுவையில் உள்ள டெலிவரிகள்",
+        wishlistItems: "விருப்பப்பட்டியல் பொருட்கள்",
+        totalSpent: "மொத்த செலவு",
+        recentOrders: "சமீபத்திய ஆர்டர்கள்",
+        viewAll: "அனைத்தையும் காண்க",
+        product1: "கைநெய்த பழங்குடி கூடை தொகுப்பு",
+        product2: "கைவினைஞர் மண்பானை செட்",
+        product3: "பாரம்பரிய பழங்குடி நகை தொகுப்பு",
+        orderNum: "ஆர்டர் #ADV-2847",
+        orderNum2: "ஆர்டர் #ADV-2846",
+        orderNum3: "ஆர்டர் #ADV-2845",
+        orderDate1: "டிசம்பர் 18, 2024",
+        orderDate2: "டிசம்பர் 15, 2024",
+        orderDate3: "டிசம்பர் 10, 2024",
+        statusShipping: "பயணத்தில்",
+        statusDelivered: "டெலிவர் செய்யப்பட்டது",
+        trackOrder: "ஆர்டரைக் கண்காணிக்கவும்",
+        buyAgain: "மீண்டும் வாங்கவும்",
+        review: "விமர்சனம் எழுதவும்",
+        featuredProducts: "சிறப்பு தயாரிப்புகள்",
+        categoryDecor: "சுவர் அலங்காரம்",
+        categoryStorage: "வீட்டு சேமிப்பு",
+        categoryPottery: "மண்பாண்டம்",
+        categoryJewelry: "நகைகள்",
+        productName1: "மூங்கில் பழங்குடி சுவர் கலை",
+        productName2: "கைநெய்த பிரீமியம் கூடை",
+        productName3: "கைவினை களிமண் குவளை செட்",
+        productName4: "பாரம்பரிய பழங்குடி மாலை",
+        addToCart: "கார்ட்டில் சேர்க்கவும்",
+        quickActions: "விரைவான செயல்கள்",
+        actionBrowse: "பிரிவுகளை உலாவவும்",
+        actionBrowseDesc: "எங்கள் தேர்ந்தெடுக்கப்பட்ட தொகுப்புகளைக் காண்க",
+        actionTrack: "ஆர்டர்களைக் கண்காணிக்கவும்",
+        actionTrackDesc: "உங்கள் டெலிவரி நிலையைப் பார்க்கவும்",
+        actionContact: "கைவினைஞர்களைத் தொடர்புகொள்ளுங்கள்",
+        actionContactDesc: "தலைசிறந்த கைவினைஞர்களுடன் இணைக",
+        actionGifts: "பிரீமியம் பரிசுகள்",
+        actionGiftsDesc: "தேர்ந்தெடுக்கப்பட்ட பரிசு தொகுப்புகள்"
+      },
+      bn: {
+        tagline: "কারিগর নির্মিত উৎকর্ষতা",
+        searchPlaceholder: "প্রামাণিক হস্তনির্মিত ধন খুঁজুন...",
+        userName: "অর্জুন রেড্ডি",
+        greeting: "শুভ সন্ধ্যা",
+        exploreCta: "নতুন সংগ্রহ দেখুন",
+        totalOrders: "মোট অর্ডার",
+        pendingDeliveries: "মুলতুবি ডেলিভারি",
+        wishlistItems: "উইশলিস্ট আইটেম",
+        totalSpent: "মোট খরচ",
+        recentOrders: "সাম্প্রতিক অর্ডার",
+        viewAll: "সব দেখুন",
+        product1: "হস্তনির্মিত উপজাতি ঝুড়ি সংগ্রহ",
+        product2: "কারিগর টেরাকোটা মৃৎশিল্প সেট",
+        product3: "ঐতিহ্যবাহী উপজাতি গহনা সংগ্রহ",
+        orderNum: "অর্ডার #ADV-2847",
+        orderNum2: "অর্ডার #ADV-2846",
+        orderNum3: "অর্ডার #ADV-2845",
+        orderDate1: "ডিসেম্বর 18, 2024",
+        orderDate2: "ডিসেম্বর 15, 2024",
+        orderDate3: "ডিসেম্বর 10, 2024",
+        statusShipping: "পরিবহনে",
+        statusDelivered: "ডেলিভার করা হয়েছে",
+        trackOrder: "অর্ডার ট্র্যাক করুন",
+        buyAgain: "আবার কিনুন",
+        review: "পর্যালোচনা লিখুন",
+        featuredProducts: "বৈশিষ্ট্যযুক্ত পণ্য",
+        categoryDecor: "দেয়াল সাজসজ্জা",
+        categoryStorage: "বাড়ির সংরক্ষণ",
+        categoryPottery: "মৃৎশিল্প",
+        categoryJewelry: "গহনা",
+        productName1: "বাঁশের উপজাতি দেয়াল শিল্প",
+        productName2: "হস্তনির্মিত প্রিমিয়াম ঝুড়ি",
+        productName3: "হস্তনির্মিত মাটির ফুলদানি সেট",
+        productName4: "ঐতিহ্যবাহী উপজাতি হার",
+        addToCart: "কার্টে যোগ করুন",
+        quickActions: "দ্রুত কর্ম",
+        actionBrowse: "বিভাগ ব্রাউজ করুন",
+        actionBrowseDesc: "আমাদের নির্বাচিত সংগ্রহ অন্বেষণ করুন",
+        actionTrack: "অর্ডার ট্র্যাক করুন",
+        actionTrackDesc: "আপনার ডেলিভারি স্থিতি পর্যবেক্ষণ করুন",
+        actionContact: "কারিগরদের সাথে যোগাযোগ করুন",
+        actionContactDesc: "মাস্টার কারিগরদের সাথে সংযুক্ত হন",
+        actionGifts: "প্রিমিয়াম উপহার",
+        actionGiftsDesc: "নির্বাচিত উপহার সংগ্রহ",
+        footerTagline: "আধুনিক কমনীয়তার জন্য প্রাচীন কারুশিল্প সংরক্ষণ। প্রতিটি টুকরো ঐতিহ্য এবং শিল্পকলার একটি মাস্টারওয়ার্ক।",
+        footerShop: "কেনাকাটা",
+        footerNewArrivals: "নতুন আগমন",
+        footerBestsellers: "বেস্টসেলার",
+        footerCollections: "সংগ্রহ",
+        footerArtisans: "বৈশিষ্ট্যযুক্ত কারিগর",
+        footerGiftSets: "উপহার সেট",
+        footerSupport: "সহায়তা",
+        footerContact: "আমাদের সাথে যোগাযোগ করুন",
+        footerShipping: "শিপিং তথ্য",
+        footerReturns: "রিটার্ন এবং এক্সচেঞ্জ",
+        footerFAQ: "প্রায়শই জিজ্ঞাসিত প্রশ্ন",
+        footerCare: "পণ্য যত্ন",
+        footerAbout: "সম্পর্কে",
+        footerStory: "আমাদের গল্প",
+        footerCommunity: "কারিগর সম্প্রদায়",
+        footerSustainability: "স্থায়িত্ব",
+        footerBlog: "ব্লগ",
+        footerCareers: "ক্যারিয়ার",
+        footerCopyright: "© 2024 আদিবাসী ঐতিহ্য। সমস্ত অধিকার সংরক্ষিত।",
+        footerPrivacy: "গোপনীয়তা নীতি",
+        footerTerms: "সেবা পাবার শর্ত",
+        footerCookies: "কুকি নীতি",
+        footerSecure: "নিরাপদ পেমেন্ট",
+        footerAuthentic: "100% প্রামাণিক",
+        footerShippingBadge: "বিশ্বব্যাপী শিপিং"
+      }
+    };
+
+    let currentLanguage = 'en';
+
+    // ==================== DYNAMIC DASHBOARD FUNCTIONALITY ====================
+
+    // Load user data and purchase history when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🔄 Loading dashboard data for:', userData.name);
+        updateUserWelcome();
+        loadUserMetrics();
+        loadPurchaseHistory();
+        initializeEventListeners();
+    });
+
+    // Update welcome message with user's first name
+    function updateUserWelcome() {
+        const firstName = userData.name.split(' ')[0];
+        document.getElementById('welcomeTitle').textContent = `Welcome Back, ${firstName}`;
+        
+        // Update avatar with initials
+        const initials = getInitials(userData.name);
+        document.querySelector('.user-avatar').textContent = initials;
+    }
+
+    // Get user initials for avatar
+    function getInitials(name) {
+        return name.split(' ').map(word => word[0]).join('').toUpperCase();
+    }
+
+    // Load user metrics from API
+    async function loadUserMetrics() {
+        try {
+            const response = await fetch(`${API_BASE}/user-metrics`, {
+                credentials: 'include'
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                updateMetricsUI(data.metrics);
+            } else {
+                useDefaultMetrics();
+            }
+        } catch (error) {
+            console.error('Error loading metrics:', error);
+            useDefaultMetrics();
+        }
+    }
+
+    // Update metrics cards with real data
+    function updateMetricsUI(metrics) {
+        const metricValues = document.querySelectorAll('.metric-value');
+        if (metricValues.length >= 4) {
+            metricValues[0].textContent = metrics.total_orders; // Total Orders
+            metricValues[1].textContent = metrics.pending_deliveries; // Pending Deliveries
+            metricValues[2].textContent = metrics.wishlist_items; // Wishlist Items
+            metricValues[3].textContent = `₹${metrics.total_spent.toLocaleString('en-IN')}`; // Total Spent
+        }
+    }
+
+    // Use default metrics if API fails
+    function useDefaultMetrics() {
+        const metricValues = document.querySelectorAll('.metric-value');
+        if (metricValues.length >= 4) {
+            metricValues[0].textContent = '0'; // Total Orders
+            metricValues[1].textContent = '0'; // Pending Deliveries
+            metricValues[2].textContent = '0'; // Wishlist Items
+            metricValues[3].textContent = '₹0'; // Total Spent
+        }
+    }
+
+    // Load purchase history from API
+    async function loadPurchaseHistory() {
+        try {
+            const response = await fetch(`${API_BASE}/purchases`, {
+                credentials: 'include'
+            });
+            
+            const data = await response.json();
+            
+            if (data.success && data.purchases.length > 0) {
+                displayRecentOrders(data.purchases);
+            } else {
+                showEmptyPurchaseState();
+            }
+        } catch (error) {
+            console.error('Error loading purchases:', error);
+            showEmptyPurchaseState();
+        }
+    }
+
+    // Display recent orders in the UI
+    function displayRecentOrders(purchases) {
+        const ordersContainer = document.querySelector('.orders-section');
+        
+        // Remove static example orders (keep the section header)
+        const existingOrders = ordersContainer.querySelectorAll('.order-card');
+        existingOrders.forEach(order => order.remove());
+        
+        // Sort by date and take latest 3
+        const recentPurchases = purchases
+            .sort((a, b) => new Date(b.purchase_date) - new Date(a.purchase_date))
+            .slice(0, 3);
+        
+        if (recentPurchases.length === 0) {
+            showEmptyPurchaseState();
+            return;
+        }
+        
+        recentPurchases.forEach(purchase => {
+            const orderCard = createOrderCard(purchase);
+            ordersContainer.appendChild(orderCard);
+        });
+    }
+
+    // Create dynamic order card
+    function createOrderCard(purchase) {
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-card';
+        
+        const statusClass = getStatusClass(purchase.status);
+        const statusText = getStatusText(purchase.status);
+        const statusIcon = getStatusIcon(purchase.status);
+        
+        orderCard.innerHTML = `
+            <div class="order-image-container">
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;background:rgba(200,180,130,0.1);border-radius:12px;">
+                    🧺
+                </div>
+            </div>
+            <div class="order-details">
+                <div class="order-name">${purchase.product_name}</div>
+                <div class="order-meta">
+                    <span>Order #${purchase.order_id}</span>
+                    <span>•</span>
+                    <span>${new Date(purchase.purchase_date).toLocaleDateString('en-IN')}</span>
+                </div>
+                <span class="order-status ${statusClass}">
+                    <span>${statusIcon}</span>
+                    <span>${statusText}</span>
+                </span>
+            </div>
+            <div class="order-price">₹${purchase.total_amount.toLocaleString('en-IN')}</div>
+            <div class="order-actions">
+                ${purchase.status === 'shipped' ? '<button class="luxury-btn primary">Track Order</button>' : ''}
+                ${purchase.status === 'delivered' ? '<button class="luxury-btn primary">Buy Again</button> <button class="luxury-btn">Write Review</button>' : ''}
+                ${purchase.status === 'pending' ? '<button class="luxury-btn">View Details</button>' : ''}
+            </div>
+        `;
+        
+        return orderCard;
+    }
+
+    // Helper functions for order status
+    function getStatusClass(status) {
+        const statusMap = {
+            'delivered': 'status-delivered',
+            'shipped': 'status-shipping', 
+            'pending': 'status-pending'
+        };
+        return statusMap[status] || 'status-pending';
+    }
+
+    function getStatusText(status) {
+        const statusMap = {
+            'delivered': 'Delivered',
+            'shipped': 'In Transit',
+            'pending': 'Processing'
+        };
+        return statusMap[status] || 'Processing';
+    }
+
+    function getStatusIcon(status) {
+        const statusMap = {
+            'delivered': '✓',
+            'shipped': '🚚',
+            'pending': '⏳'
+        };
+        return statusMap[status] || '⏳';
+    }
+
+    // Show empty state when no purchases
+    function showEmptyPurchaseState() {
+        const ordersContainer = document.querySelector('.orders-section');
+        
+        // Remove existing orders
+        const existingOrders = ordersContainer.querySelectorAll('.order-card');
+        existingOrders.forEach(order => order.remove());
+        
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state';
+        emptyState.style.textAlign = 'center';
+        emptyState.style.padding = '60px';
+        emptyState.style.color = '#8a8578';
+        emptyState.style.background = 'rgba(20, 20, 20, 0.6)';
+        emptyState.style.border = '1px solid rgba(200, 180, 130, 0.15)';
+        emptyState.style.borderRadius = '16px';
+        emptyState.style.marginTop = '20px';
+        
+        emptyState.innerHTML = `
+            <div style="font-size: 64px; margin-bottom: 20px;">🛍️</div>
+            <h3 style="color: #c8b482; margin-bottom: 15px; font-family: 'Playfair Display', serif;">No Purchases Yet</h3>
+            <p style="margin-bottom: 30px; line-height: 1.6;">Start your journey with authentic handcrafted treasures from indigenous artisans.</p>
+            <button class="hero-cta" onclick="window.location.href='/products'" style="cursor: pointer;">
+                <span>Start Shopping</span>
+                <span>→</span>
+            </button>
+        `;
+        
+        ordersContainer.appendChild(emptyState);
+    }
+
+    // ==================== EXISTING FUNCTIONALITY ====================
+
+    // Language selector
+    document.getElementById('languageSelector').addEventListener('change', function() {
+        currentLanguage = this.value;
+        updateLanguage();
+    });
+
+    function updateLanguage() {
+        const t = translations[currentLanguage];
+
+        // Update all elements with data-translate attribute
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (t[key]) {
+                element.textContent = t[key];
+            }
+        });
+
+        // Update placeholder
+        document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+    }
+
+    function initializeEventListeners() {
+        // Wishlist functionality
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.textContent = this.textContent === '🤍' ? '❤️' : '🤍';
+            });
+        });
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const originalText = this.textContent;
+                this.textContent = '✓ Added!';
+                this.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = 'linear-gradient(135deg, #c8b482 0%, #a08850 100%)';
+                }, 2000);
+            });
+        });
+
+        // Button click handlers
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('luxury-btn') || e.target.closest('.luxury-btn')) {
+                const button = e.target.classList.contains('luxury-btn') ? e.target : e.target.closest('.luxury-btn');
+                
+                if (button.textContent.includes('Track Order')) {
+                    alert('Order tracking feature coming soon!');
+                } else if (button.textContent.includes('Buy Again')) {
+                    alert('Adding product to cart...');
+                } else if (button.textContent.includes('Write Review')) {
+                    alert('Review feature coming soon!');
+                } else if (button.textContent.includes('View Details')) {
+                    alert('Order details feature coming soon!');
+                }
+            }
+        });
+    }
+
+    // Element SDK Integration
+    async function onConfigChange(config) {
+        const baseFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = 'Inter, sans-serif';
+        const serifFont = 'Playfair Display, serif';
+        const customFont = `${baseFont}, ${baseFontStack}`;
+        const baseSize = config.font_size || defaultConfig.font_size;
+
+        document.body.style.fontFamily = customFont;
+
+        // Apply colors
+        const bgColor = config.background_color || defaultConfig.background_color;
+        document.querySelector('.luxury-dashboard').style.background = `linear-gradient(180deg, ${bgColor} 0%, ${config.surface_color || defaultConfig.surface_color} 100%)`;
+        document.querySelector('.top-header').style.background = `rgba(${parseInt(bgColor.slice(1,3), 16)}, ${parseInt(bgColor.slice(3,5), 16)}, ${parseInt(bgColor.slice(5,7), 16)}, 0.95)`;
+
+        const accentColor = config.accent_color || defaultConfig.accent_color;
+        document.querySelectorAll('.brand-logo, .hero-cta, .luxury-btn.primary, .add-cart-btn').forEach(el => {
+            el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #a08850 100%)`;
+        });
+
+        document.querySelectorAll('.brand-name, .hero-title, .section-title, .metric-value, .product-price, .order-price').forEach(el => {
+            el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #f4e4c1 50%, ${accentColor} 100%)`;
+            el.style.webkitBackgroundClip = 'text';
+            el.style.webkitTextFillColor = 'transparent';
+            el.style.backgroundClip = 'text';
+        });
+
+        const textColor = config.text_color || defaultConfig.text_color;
+        document.body.style.color = textColor;
+
+        // Apply font sizes
+        document.querySelector('.hero-title').style.fontSize = `${baseSize * 3.5}px`;
+        document.querySelector('.hero-subtitle').style.fontSize = `${baseSize * 1.15}px`;
+
+        // Apply text content
+        document.getElementById('brandName').textContent = config.brand_name || defaultConfig.brand_name;
+        document.getElementById('footerBrandName').textContent = config.brand_name || defaultConfig.brand_name;
+        
+        // Update welcome title with user's first name
+        const firstName = userData.name.split(' ')[0];
+        document.getElementById('welcomeTitle').textContent = `Welcome Back, ${firstName}`;
+        
+        document.getElementById('welcomeSubtitle').textContent = config.welcome_subtitle || defaultConfig.welcome_subtitle;
+        
+        const ctaTranslated = translations[currentLanguage].exploreCta;
+        document.querySelector('#heroCta span:first-child').textContent = config.hero_cta || defaultConfig.hero_cta;
+    }
+
+    function mapToCapabilities(config) {
+        return {
+            recolorables: [
+                {
+                    get: () => config.background_color || defaultConfig.background_color,
+                    set: (value) => {
+                        config.background_color = value;
+                        window.elementSdk.setConfig({ background_color: value });
+                    }
+                },
+                {
+                    get: () => config.accent_color || defaultConfig.accent_color,
+                    set: (value) => {
+                        config.accent_color = value;
+                        window.elementSdk.setConfig({ accent_color: value });
+                    }
+                },
+                {
+                    get: () => config.surface_color || defaultConfig.surface_color,
+                    set: (value) => {
+                        config.surface_color = value;
+                        window.elementSdk.setConfig({ surface_color: value });
+                    }
+                },
+                {
+                    get: () => config.text_color || defaultConfig.text_color,
+                    set: (value) => {
+                        config.text_color = value;
+                        window.elementSdk.setConfig({ text_color: value });
+                    }
+                },
+                {
+                    get: () => config.secondary_color || defaultConfig.secondary_color,
+                    set: (value) => {
+                        config.secondary_color = value;
+                        window.elementSdk.setConfig({ secondary_color: value });
+                    }
+                }
+            ],
+            borderables: [],
+            fontEditable: {
+                get: () => config.font_family || defaultConfig.font_family,
+                set: (value) => {
+                    config.font_family = value;
+                    window.elementSdk.setConfig({ font_family: value });
+                }
+            },
+            fontSizeable: {
+                get: () => config.font_size || defaultConfig.font_size,
+                set: (value) => {
+                    config.font_size = value;
+                    window.elementSdk.setConfig({ font_size: value });
+                }
+            }
+        };
+    }
+
+    function mapToEditPanelValues(config) {
+        return new Map([
+            ["brand_name", config.brand_name || defaultConfig.brand_name],
+            ["welcome_title", config.welcome_title || defaultConfig.welcome_title],
+            ["welcome_subtitle", config.welcome_subtitle || defaultConfig.welcome_subtitle],
+            ["hero_cta", config.hero_cta || defaultConfig.hero_cta]
+        ]);
+    }
+
+    if (window.elementSdk) {
+        window.elementSdk.init({
+            defaultConfig,
+            onConfigChange,
+            mapToCapabilities,
+            mapToEditPanelValues
+        });
+    }
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a496da180f77a1c',t:'MTc2NDE2MDU1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

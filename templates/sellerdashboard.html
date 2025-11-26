@@ -1,0 +1,1926 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adivasi Heritage - Seller Dashboard</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #e8e6e3;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    .seller-dashboard {
+      width: 100%;
+      min-height: 100%;
+      background: linear-gradient(180deg, #0a0a0a 0%, #1a1510 100%);
+    }
+
+    /* Top Header Bar */
+    .top-header {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(200, 180, 130, 0.15);
+      padding: 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 8px 32px rgba(200, 180, 130, 0.3);
+      transition: all 0.4s ease;
+    }
+
+    .brand-logo:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 48px rgba(200, 180, 130, 0.5);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c8b482 0%, #f4e4c1 50%, #c8b482 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 1px;
+    }
+
+    .brand-tagline {
+      font-size: 0.75em;
+      color: #8a8578;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .language-selector {
+      position: relative;
+    }
+
+    .language-btn {
+      background: rgba(30, 30, 30, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 8px;
+      padding: 10px 18px;
+      color: #c8b482;
+      font-size: 0.9em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .language-btn:hover {
+      background: rgba(200, 180, 130, 0.1);
+      border-color: #c8b482;
+      transform: translateY(-2px);
+    }
+
+    .notification-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(30, 30, 30, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .notification-icon:hover {
+      background: rgba(200, 180, 130, 0.1);
+      border-color: #c8b482;
+      transform: translateY(-2px);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #0a0a0a;
+    }
+
+    .user-profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(30, 30, 30, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 50px;
+      padding: 8px 20px 8px 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .user-profile-btn:hover {
+      background: rgba(200, 180, 130, 0.1);
+      border-color: #c8b482;
+      transform: translateY(-2px);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+
+    .user-name {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #e8e6e3;
+    }
+
+    /* Main Content */
+    .dashboard-content {
+      padding: 60px;
+    }
+
+    /* Hero Welcome Section */
+    .hero-welcome {
+      background: linear-gradient(135deg, rgba(200, 180, 130, 0.15) 0%, rgba(160, 136, 80, 0.05) 100%);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 24px;
+      padding: 60px;
+      margin-bottom: 50px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-welcome::before {
+      content: '🏺';
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      font-size: 180px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-greeting {
+      font-size: 0.95em;
+      color: #8a8578;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c8b482 0%, #f4e4c1 50%, #c8b482 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15em;
+      color: #b8b0a0;
+      line-height: 1.6;
+      margin-bottom: 35px;
+      font-weight: 300;
+    }
+
+    /* Sales Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .metric-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      padding: 35px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #c8b482, #f4e4c1, #c8b482);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-8px);
+      background: rgba(30, 30, 30, 0.8);
+      border-color: #c8b482;
+      box-shadow: 0 16px 48px rgba(200, 180, 130, 0.2);
+    }
+
+    .metric-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .metric-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .metric-icon {
+      width: 65px;
+      height: 65px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      transition: all 0.4s ease;
+    }
+
+    .metric-card:hover .metric-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .metric-icon.revenue {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .metric-icon.orders {
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.3);
+    }
+
+    .metric-icon.products {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .metric-icon.rating {
+      background: rgba(234, 179, 8, 0.1);
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .metric-trend {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .trend-up {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+
+    .trend-down {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+
+    .metric-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8em;
+      font-weight: 700;
+      color: #c8b482;
+      margin-bottom: 10px;
+    }
+
+    .metric-label {
+      font-size: 0.95em;
+      color: #8a8578;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 35px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      font-weight: 700;
+      color: #c8b482;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .view-all-link {
+      color: #8a8578;
+      text-decoration: none;
+      font-size: 0.95em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .view-all-link:hover {
+      color: #c8b482;
+      gap: 12px;
+    }
+
+    .luxury-btn {
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.3);
+      color: #c8b482;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.85em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .luxury-btn:hover {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      border-color: #c8b482;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.3);
+    }
+
+    .luxury-btn.primary {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      border-color: #c8b482;
+    }
+
+    .luxury-btn.primary:hover {
+      box-shadow: 0 8px 32px rgba(200, 180, 130, 0.5);
+    }
+
+    /* Recent Orders Table */
+    .orders-table-container {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 60px;
+    }
+
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .orders-table thead {
+      background: rgba(200, 180, 130, 0.08);
+      border-bottom: 1px solid rgba(200, 180, 130, 0.15);
+    }
+
+    .orders-table th {
+      padding: 20px 25px;
+      text-align: left;
+      font-size: 0.85em;
+      font-weight: 700;
+      color: #c8b482;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .orders-table td {
+      padding: 25px;
+      border-bottom: 1px solid rgba(200, 180, 130, 0.08);
+      font-size: 0.95em;
+      color: #b8b0a0;
+    }
+
+    .orders-table tr:hover {
+      background: rgba(200, 180, 130, 0.05);
+    }
+
+    .order-id {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #e8e6e3;
+    }
+
+    .customer-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .customer-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0a0a0a;
+      flex-shrink: 0;
+    }
+
+    .customer-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .customer-name {
+      font-weight: 600;
+      color: #e8e6e3;
+    }
+
+    .customer-email {
+      font-size: 0.85em;
+      color: #6a6256;
+    }
+
+    .order-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-completed {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .status-processing {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .status-pending {
+      background: rgba(234, 179, 8, 0.15);
+      color: #eab308;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .order-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #c8b482;
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .product-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(200, 180, 130, 0.1) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      border-color: #c8b482;
+      box-shadow: 0 20px 60px rgba(200, 180, 130, 0.25);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    .product-image-wrapper {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      background: rgba(200, 180, 130, 0.05);
+      position: relative;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.15) rotate(2deg);
+    }
+
+    .stock-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 2;
+    }
+
+    .stock-low {
+      color: #eab308;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .stock-good {
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .product-info {
+      padding: 28px;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #e8e6e3;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .product-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stars {
+      color: #c8b482;
+      font-size: 0.9em;
+    }
+
+    .rating-count {
+      font-size: 0.85em;
+      color: #6a6256;
+    }
+
+    .sales-count {
+      font-size: 0.85em;
+      color: #8a8578;
+      font-weight: 600;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid rgba(200, 180, 130, 0.1);
+    }
+
+    .product-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #c8b482;
+    }
+
+    .edit-product-btn {
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.3);
+      color: #c8b482;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.85em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .edit-product-btn:hover {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      color: #0a0a0a;
+      transform: translateY(-2px);
+    }
+
+    /* Quick Actions */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
+    }
+
+    .quick-action-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 16px;
+      padding: 35px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .quick-action-card:hover {
+      background: rgba(30, 30, 30, 0.8);
+      border-color: #c8b482;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(200, 180, 130, 0.2);
+    }
+
+    .quick-action-icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+      display: inline-block;
+      transition: transform 0.4s ease;
+    }
+
+    .quick-action-card:hover .quick-action-icon {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .quick-action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15em;
+      font-weight: 600;
+      color: #c8b482;
+      margin-bottom: 10px;
+    }
+
+    .quick-action-desc {
+      font-size: 0.85em;
+      color: #8a8578;
+      line-height: 1.5;
+    }
+
+    /* Luxury Footer */
+    .luxury-footer {
+      background: rgba(10, 10, 10, 0.95);
+      border-top: 1px solid rgba(200, 180, 130, 0.2);
+      margin-top: 80px;
+      padding: 80px 0 0 0;
+      position: relative;
+    }
+
+    .luxury-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c8b482, transparent);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .footer-logo {
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.2);
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c8b482 0%, #f4e4c1 50%, #c8b482 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 0.95em;
+      color: #8a8578;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(200, 180, 130, 0.1);
+      border: 1px solid rgba(200, 180, 130, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .social-icon:hover {
+      background: linear-gradient(135deg, #c8b482 0%, #a08850 100%);
+      border-color: #c8b482;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(200, 180, 130, 0.3);
+    }
+
+    .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15em;
+      font-weight: 700;
+      color: #c8b482;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .footer-links a {
+      color: #8a8578;
+      text-decoration: none;
+      font-size: 0.95em;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      display: inline-block;
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: #c8b482;
+      transition: width 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #c8b482;
+      padding-left: 8px;
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(200, 180, 130, 0.15);
+      padding: 35px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .copyright {
+      font-size: 0.9em;
+      color: #6a6256;
+      font-weight: 300;
+    }
+
+    .footer-legal {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .footer-legal a {
+      color: #8a8578;
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.3s ease;
+      font-weight: 400;
+    }
+
+    .footer-legal a:hover {
+      color: #c8b482;
+    }
+
+    .footer-legal .separator {
+      color: #4a4236;
+      font-size: 0.7em;
+    }
+
+    .footer-badges {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .badge-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(200, 180, 130, 0.08);
+      border: 1px solid rgba(200, 180, 130, 0.15);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .badge-item:hover {
+      background: rgba(200, 180, 130, 0.15);
+      border-color: rgba(200, 180, 130, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .badge-icon {
+      font-size: 18px;
+    }
+
+    .badge-text {
+      font-size: 0.8em;
+      color: #c8b482;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .dashboard-content {
+        padding: 40px;
+      }
+
+      .hero-welcome {
+        padding: 40px;
+      }
+
+      .hero-title {
+        font-size: 2.8em;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-header {
+        padding: 15px 25px;
+        flex-wrap: wrap;
+      }
+
+      .brand-logo {
+        width: 50px;
+        height: 50px;
+        font-size: 26px;
+      }
+
+      .brand-name {
+        font-size: 1.4em;
+      }
+
+      .dashboard-content {
+        padding: 25px;
+      }
+
+      .hero-welcome {
+        padding: 30px;
+      }
+
+      .hero-title {
+        font-size: 2em;
+      }
+
+      .hero-subtitle {
+        font-size: 1em;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .section-title {
+        font-size: 1.6em;
+      }
+
+      .orders-table-container {
+        overflow-x: auto;
+      }
+
+      .orders-table {
+        min-width: 800px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        padding: 0 25px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-badges {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .badge-item {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-bottom-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 1.8em;
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .user-name {
+        display: none;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="seller-dashboard"><!-- Top Header -->
+   <header class="top-header">
+    <div class="brand-section">
+     <div class="brand-logo">
+      🏺
+     </div>
+     <div class="brand-text">
+      <div class="brand-name" id="brandName">
+       Adivasi Heritage
+      </div>
+      <div class="brand-tagline" data-translate="tagline">
+       Seller Portal
+      </div>
+     </div>
+    </div>
+    <div class="header-right">
+     <div class="language-selector"><select class="language-btn" id="languageSelector"> <option value="en">🌐 English</option> <option value="hi">🌐 हिन्दी</option> <option value="ta">🌐 தமிழ்</option> <option value="bn">🌐 বাংলা</option> </select>
+     </div>
+     <div class="notification-icon">
+      🔔 <span class="notification-badge">8</span>
+     </div>
+     <div class="user-profile-btn">
+      <div class="user-avatar">
+       RK
+      </div><span class="user-name" data-translate="userName">Ravi Kumar</span>
+     </div>
+    </div>
+   </header><!-- Main Dashboard Content -->
+   <main class="dashboard-content"><!-- Hero Welcome Section -->
+    <section class="hero-welcome">
+     <div class="hero-content">
+      <div class="hero-greeting" data-translate="greeting">
+       Good Evening, Artisan
+      </div>
+      <h1 class="hero-title" id="welcomeTitle">Welcome Back, Ravi</h1>
+      <p class="hero-subtitle" id="dashboardSubtitle">Manage your crafts, track sales, and grow your artisan business. Your dashboard is ready with today's insights.</p>
+     </div>
+    </section><!-- Sales Metrics -->
+    <div class="metrics-grid">
+     <div class="metric-card">
+      <div class="metric-header">
+       <div class="metric-icon revenue">
+        💰
+       </div>
+       <div class="metric-trend trend-up"><span>↑</span> <span>12%</span>
+       </div>
+      </div>
+      <div class="metric-value">
+       ₹2,45,800
+      </div>
+      <div class="metric-label" data-translate="totalRevenue">
+       Total Revenue
+      </div>
+     </div>
+     <div class="metric-card">
+      <div class="metric-header">
+       <div class="metric-icon orders">
+        📦
+       </div>
+       <div class="metric-trend trend-up"><span>↑</span> <span>8%</span>
+       </div>
+      </div>
+      <div class="metric-value">
+       127
+      </div>
+      <div class="metric-label" data-translate="totalOrders">
+       Total Orders
+      </div>
+     </div>
+     <div class="metric-card">
+      <div class="metric-header">
+       <div class="metric-icon products">
+        🎨
+       </div>
+       <div class="metric-trend trend-up"><span>↑</span> <span>5</span>
+       </div>
+      </div>
+      <div class="metric-value">
+       34
+      </div>
+      <div class="metric-label" data-translate="activeProducts">
+       Active Products
+      </div>
+     </div>
+     <div class="metric-card">
+      <div class="metric-header">
+       <div class="metric-icon rating">
+        ⭐
+       </div>
+       <div class="metric-trend trend-up"><span>↑</span> <span>0.2</span>
+       </div>
+      </div>
+      <div class="metric-value">
+       4.8
+      </div>
+      <div class="metric-label" data-translate="avgRating">
+       Average Rating
+      </div>
+     </div>
+    </div><!-- Recent Orders Section -->
+    <section>
+     <div class="section-header">
+      <h2 class="section-title"><span>📋</span> <span data-translate="recentOrders">Recent Orders</span></h2><a href="#" class="view-all-link"> <span data-translate="viewAll">View All</span> <span>→</span> </a>
+     </div>
+     <div class="orders-table-container">
+      <table class="orders-table">
+       <thead>
+        <tr>
+         <th data-translate="orderID">Order ID</th>
+         <th data-translate="customer">Customer</th>
+         <th data-translate="product">Product</th>
+         <th data-translate="date">Date</th>
+         <th data-translate="status">Status</th>
+         <th data-translate="amount">Amount</th>
+         <th data-translate="actions">Actions</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td><span class="order-id">#ADV-3421</span></td>
+         <td>
+          <div class="customer-info">
+           <div class="customer-avatar">
+            AS
+           </div>
+           <div class="customer-details">
+            <div class="customer-name">
+             Anjali Sharma
+            </div>
+            <div class="customer-email">
+             anjali@email.com
+            </div>
+           </div>
+          </div></td>
+         <td>Handwoven Basket Set</td>
+         <td>Dec 20, 2024</td>
+         <td><span class="order-status status-processing"><span>⏳</span> <span data-translate="processing">Processing</span></span></td>
+         <td><span class="order-amount">₹8,499</span></td>
+         <td><button class="luxury-btn" data-translate="viewBtn">View</button></td>
+        </tr>
+        <tr>
+         <td><span class="order-id">#ADV-3420</span></td>
+         <td>
+          <div class="customer-info">
+           <div class="customer-avatar">
+            MJ
+           </div>
+           <div class="customer-details">
+            <div class="customer-name">
+             Manoj Joshi
+            </div>
+            <div class="customer-email">
+             manoj@email.com
+            </div>
+           </div>
+          </div></td>
+         <td>Tribal Wall Art</td>
+         <td>Dec 19, 2024</td>
+         <td><span class="order-status status-completed"><span>✓</span> <span data-translate="completed">Completed</span></span></td>
+         <td><span class="order-amount">₹12,999</span></td>
+         <td><button class="luxury-btn" data-translate="viewBtn">View</button></td>
+        </tr>
+        <tr>
+         <td><span class="order-id">#ADV-3419</span></td>
+         <td>
+          <div class="customer-info">
+           <div class="customer-avatar">
+            PD
+           </div>
+           <div class="customer-details">
+            <div class="customer-name">
+             Priya Desai
+            </div>
+            <div class="customer-email">
+             priya@email.com
+            </div>
+           </div>
+          </div></td>
+         <td>Clay Pottery Set</td>
+         <td>Dec 18, 2024</td>
+         <td><span class="order-status status-pending"><span>⏸</span> <span data-translate="pending">Pending</span></span></td>
+         <td><span class="order-amount">₹9,999</span></td>
+         <td><button class="luxury-btn" data-translate="viewBtn">View</button></td>
+        </tr>
+        <tr>
+         <td><span class="order-id">#ADV-3418</span></td>
+         <td>
+          <div class="customer-info">
+           <div class="customer-avatar">
+            RK
+           </div>
+           <div class="customer-details">
+            <div class="customer-name">
+             Rahul Kapoor
+            </div>
+            <div class="customer-email">
+             rahul@email.com
+            </div>
+           </div>
+          </div></td>
+         <td>Tribal Jewelry Set</td>
+         <td>Dec 17, 2024</td>
+         <td><span class="order-status status-completed"><span>✓</span> <span data-translate="completed">Completed</span></span></td>
+         <td><span class="order-amount">₹18,499</span></td>
+         <td><button class="luxury-btn" data-translate="viewBtn">View</button></td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </section><!-- Your Products -->
+    <section style="margin-top: 60px;">
+     <div class="section-header">
+      <h2 class="section-title"><span>🎨</span> <span data-translate="yourProducts">Your Products</span></h2><button class="luxury-btn primary" data-translate="addProduct">+ Add Product</button>
+     </div>
+     <div class="products-grid">
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=500" alt="Basket" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>🧺</div>';"> <span class="stock-badge stock-good" data-translate="inStock">In Stock (23)</span>
+       </div>
+       <div class="product-info">
+        <div class="product-name" data-translate="product1">
+         Handwoven Tribal Basket
+        </div>
+        <div class="product-stats">
+         <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="rating-count">(94)</span>
+         </div>
+         <div class="sales-count">
+          47 sold
+         </div>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹4,499
+         </div><button class="edit-product-btn" data-translate="editBtn">Edit</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=500" alt="Pottery" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>🏺</div>';"> <span class="stock-badge stock-low" data-translate="lowStock">Low Stock (5)</span>
+       </div>
+       <div class="product-info">
+        <div class="product-name" data-translate="product2">
+         Terracotta Pottery Set
+        </div>
+        <div class="product-stats">
+         <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="rating-count">(156)</span>
+         </div>
+         <div class="sales-count">
+          89 sold
+         </div>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹9,999
+         </div><button class="edit-product-btn" data-translate="editBtn">Edit</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=500" alt="Wall Art" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>🎨</div>';"> <span class="stock-badge stock-good" data-translate="inStock">In Stock (15)</span>
+       </div>
+       <div class="product-info">
+        <div class="product-name" data-translate="product3">
+         Bamboo Tribal Wall Art
+        </div>
+        <div class="product-stats">
+         <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="rating-count">(128)</span>
+         </div>
+         <div class="sales-count">
+          62 sold
+         </div>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹6,999
+         </div><button class="edit-product-btn" data-translate="editBtn">Edit</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card">
+       <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=500" alt="Jewelry" class="product-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:rgba(200,180,130,0.1)\'>💍</div>';"> <span class="stock-badge stock-good" data-translate="inStock">In Stock (18)</span>
+       </div>
+       <div class="product-info">
+        <div class="product-name" data-translate="product4">
+         Heritage Tribal Necklace
+        </div>
+        <div class="product-stats">
+         <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="rating-count">(203)</span>
+         </div>
+         <div class="sales-count">
+          135 sold
+         </div>
+        </div>
+        <div class="product-footer">
+         <div class="product-price">
+          ₹14,999
+         </div><button class="edit-product-btn" data-translate="editBtn">Edit</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Quick Actions -->
+    <section style="margin-top: 60px;">
+     <div class="section-header">
+      <h2 class="section-title"><span>⚡</span> <span data-translate="quickActions">Quick Actions</span></h2>
+     </div>
+     <div class="quick-actions-grid">
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        📦
+       </div>
+       <div class="quick-action-title" data-translate="actionOrders">
+        Manage Orders
+       </div>
+       <div class="quick-action-desc" data-translate="actionOrdersDesc">
+        View and process orders
+       </div>
+      </div>
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        📊
+       </div>
+       <div class="quick-action-title" data-translate="actionAnalytics">
+        View Analytics
+       </div>
+       <div class="quick-action-desc" data-translate="actionAnalyticsDesc">
+        Track your sales performance
+       </div>
+      </div>
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        💬
+       </div>
+       <div class="quick-action-title" data-translate="actionMessages">
+        Customer Messages
+       </div>
+       <div class="quick-action-desc" data-translate="actionMessagesDesc">
+        Respond to inquiries
+       </div>
+      </div>
+      <div class="quick-action-card">
+       <div class="quick-action-icon">
+        ⚙️
+       </div>
+       <div class="quick-action-title" data-translate="actionSettings">
+        Store Settings
+       </div>
+       <div class="quick-action-desc" data-translate="actionSettingsDesc">
+        Configure your shop
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Luxury Footer -->
+   <footer class="luxury-footer">
+    <div class="footer-content">
+     <div class="footer-grid"><!-- Brand Column -->
+      <div class="footer-column">
+       <div class="footer-brand">
+        <div class="footer-logo">
+         🏺
+        </div>
+        <div class="footer-brand-name" id="footerBrandName">
+         Adivasi Heritage
+        </div>
+       </div>
+       <p class="footer-tagline" data-translate="footerTagline">Empowering artisans to share their heritage with the world. Your craftsmanship, our platform.</p>
+       <div class="footer-social"><a href="#" class="social-icon">📘</a> <a href="#" class="social-icon">📷</a> <a href="#" class="social-icon">🐦</a> <a href="#" class="social-icon">📌</a>
+       </div>
+      </div><!-- Seller Tools Column -->
+      <div class="footer-column">
+       <h3 class="footer-title" data-translate="footerSeller">Seller Tools</h3>
+       <ul class="footer-links">
+        <li><a href="#" data-translate="footerDashboard">Dashboard</a></li>
+        <li><a href="#" data-translate="footerProducts">Product Management</a></li>
+        <li><a href="#" data-translate="footerOrders">Order Fulfillment</a></li>
+        <li><a href="#" data-translate="footerAnalytics">Sales Analytics</a></li>
+        <li><a href="#" data-translate="footerPayments">Payments</a></li>
+       </ul>
+      </div><!-- Support Column -->
+      <div class="footer-column">
+       <h3 class="footer-title" data-translate="footerSupport">Support</h3>
+       <ul class="footer-links">
+        <li><a href="#" data-translate="footerHelp">Help Center</a></li>
+        <li><a href="#" data-translate="footerGuides">Seller Guides</a></li>
+        <li><a href="#" data-translate="footerShipping">Shipping Policies</a></li>
+        <li><a href="#" data-translate="footerFAQ">FAQ</a></li>
+        <li><a href="#" data-translate="footerContact">Contact Support</a></li>
+       </ul>
+      </div><!-- Community Column -->
+      <div class="footer-column">
+       <h3 class="footer-title" data-translate="footerCommunity">Community</h3>
+       <ul class="footer-links">
+        <li><a href="#" data-translate="footerForum">Artisan Forum</a></li>
+        <li><a href="#" data-translate="footerStories">Success Stories</a></li>
+        <li><a href="#" data-translate="footerWorkshops">Workshops</a></li>
+        <li><a href="#" data-translate="footerNetwork">Network</a></li>
+        <li><a href="#" data-translate="footerBlog">Blog</a></li>
+       </ul>
+      </div>
+     </div><!-- Footer Bottom -->
+     <div class="footer-bottom">
+      <div class="footer-bottom-content">
+       <p class="copyright" data-translate="footerCopyright">© 2024 Adivasi Heritage. All rights reserved.</p>
+       <div class="footer-legal"><a href="#" data-translate="footerPrivacy">Privacy Policy</a> <span class="separator">•</span> <a href="#" data-translate="footerTerms">Seller Terms</a> <span class="separator">•</span> <a href="#" data-translate="footerCookies">Cookie Policy</a>
+       </div>
+      </div>
+      <div class="footer-badges">
+       <div class="badge-item"><span class="badge-icon">🔒</span> <span class="badge-text" data-translate="footerSecure">Secure Platform</span>
+       </div>
+       <div class="badge-item"><span class="badge-icon">✓</span> <span class="badge-text" data-translate="footerVerified">Verified Sellers</span>
+       </div>
+       <div class="badge-item"><span class="badge-icon">💰</span> <span class="badge-text" data-translate="footerCommission">Low Commission</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      background_color: "#0a0a0a",
+      accent_color: "#c8b482",
+      surface_color: "#1a1510",
+      text_color: "#e8e6e3",
+      secondary_color: "#8a8578",
+      font_family: "Inter",
+      font_size: 16,
+      brand_name: "Adivasi Heritage",
+      welcome_title: "Welcome Back, Ravi",
+      dashboard_subtitle: "Manage your crafts, track sales, and grow your artisan business. Your dashboard is ready with today's insights."
+    };
+
+    // Multilingual translations
+    const translations = {
+      en: {
+        tagline: "Seller Portal",
+        userName: "Ravi Kumar",
+        greeting: "Good Evening, Artisan",
+        totalRevenue: "Total Revenue",
+        totalOrders: "Total Orders",
+        activeProducts: "Active Products",
+        avgRating: "Average Rating",
+        recentOrders: "Recent Orders",
+        viewAll: "View All",
+        orderID: "Order ID",
+        customer: "Customer",
+        product: "Product",
+        date: "Date",
+        status: "Status",
+        amount: "Amount",
+        actions: "Actions",
+        processing: "Processing",
+        completed: "Completed",
+        pending: "Pending",
+        viewBtn: "View",
+        yourProducts: "Your Products",
+        addProduct: "+ Add Product",
+        product1: "Handwoven Tribal Basket",
+        product2: "Terracotta Pottery Set",
+        product3: "Bamboo Tribal Wall Art",
+        product4: "Heritage Tribal Necklace",
+        inStock: "In Stock",
+        lowStock: "Low Stock",
+        editBtn: "Edit",
+        quickActions: "Quick Actions",
+        actionOrders: "Manage Orders",
+        actionOrdersDesc: "View and process orders",
+        actionAnalytics: "View Analytics",
+        actionAnalyticsDesc: "Track your sales performance",
+        actionMessages: "Customer Messages",
+        actionMessagesDesc: "Respond to inquiries",
+        actionSettings: "Store Settings",
+        actionSettingsDesc: "Configure your shop",
+        footerTagline: "Empowering artisans to share their heritage with the world. Your craftsmanship, our platform.",
+        footerSeller: "Seller Tools",
+        footerDashboard: "Dashboard",
+        footerProducts: "Product Management",
+        footerOrders: "Order Fulfillment",
+        footerAnalytics: "Sales Analytics",
+        footerPayments: "Payments",
+        footerSupport: "Support",
+        footerHelp: "Help Center",
+        footerGuides: "Seller Guides",
+        footerShipping: "Shipping Policies",
+        footerFAQ: "FAQ",
+        footerContact: "Contact Support",
+        footerCommunity: "Community",
+        footerForum: "Artisan Forum",
+        footerStories: "Success Stories",
+        footerWorkshops: "Workshops",
+        footerNetwork: "Network",
+        footerBlog: "Blog",
+        footerCopyright: "© 2024 Adivasi Heritage. All rights reserved.",
+        footerPrivacy: "Privacy Policy",
+        footerTerms: "Seller Terms",
+        footerCookies: "Cookie Policy",
+        footerSecure: "Secure Platform",
+        footerVerified: "Verified Sellers",
+        footerCommission: "Low Commission"
+      },
+      hi: {
+        tagline: "विक्रेता पोर्टल",
+        userName: "रवि कुमार",
+        greeting: "शुभ संध्या, कारीगर",
+        totalRevenue: "कुल राजस्व",
+        totalOrders: "कुल ऑर्डर",
+        activeProducts: "सक्रिय उत्पाद",
+        avgRating: "औसत रेटिंग",
+        recentOrders: "हाल के ऑर्डर",
+        viewAll: "सभी देखें",
+        orderID: "ऑर्डर ID",
+        customer: "ग्राहक",
+        product: "उत्पाद",
+        date: "तारीख",
+        status: "स्थिति",
+        amount: "राशि",
+        actions: "कार्रवाई",
+        processing: "प्रोसेसिंग",
+        completed: "पूर्ण",
+        pending: "लंबित",
+        viewBtn: "देखें",
+        yourProducts: "आपके उत्पाद",
+        addProduct: "+ उत्पाद जोड़ें",
+        product1: "हस्तनिर्मित आदिवासी टोकरी",
+        product2: "टेराकोटा बर्तन सेट",
+        product3: "बांस की आदिवासी दीवार कला",
+        product4: "विरासत आदिवासी हार",
+        inStock: "स्टॉक में",
+        lowStock: "कम स्टॉक",
+        editBtn: "संपादित करें",
+        quickActions: "त्वरित कार्रवाई",
+        actionOrders: "ऑर्डर प्रबंधित करें",
+        actionOrdersDesc: "ऑर्डर देखें और प्रोसेस करें",
+        actionAnalytics: "एनालिटिक्स देखें",
+        actionAnalyticsDesc: "अपनी बिक्री का प्रदर्शन ट्रैक करें",
+        actionMessages: "ग्राहक संदेश",
+        actionMessagesDesc: "पूछताछ का जवाब दें",
+        actionSettings: "स्टोर सेटिंग्स",
+        actionSettingsDesc: "अपनी दुकान कॉन्फ़िगर करें",
+        footerTagline: "कारीगरों को अपनी विरासत को दुनिया के साथ साझा करने के लिए सशक्त बनाना। आपका शिल्प, हमारा मंच।",
+        footerSeller: "विक्रेता उपकरण",
+        footerDashboard: "डैशबोर्ड",
+        footerProducts: "उत्पाद प्रबंधन",
+        footerOrders: "ऑर्डर पूर्ति",
+        footerAnalytics: "बिक्री विश्लेषण",
+        footerPayments: "भुगतान",
+        footerSupport: "सहायता",
+        footerHelp: "सहायता केंद्र",
+        footerGuides: "विक्रेता गाइड",
+        footerShipping: "शिपिंग नीतियां",
+        footerFAQ: "पूछे जाने वाले प्रश्न",
+        footerContact: "सहायता से संपर्क करें",
+        footerCommunity: "समुदाय",
+        footerForum: "कारीगर फोरम",
+        footerStories: "सफलता की कहानियां",
+        footerWorkshops: "कार्यशालाएं",
+        footerNetwork: "नेटवर्क",
+        footerBlog: "ब्लॉग",
+        footerCopyright: "© 2024 आदिवासी विरासत। सर्वाधिकार सुरक्षित।",
+        footerPrivacy: "गोपनीयता नीति",
+        footerTerms: "विक्रेता शर्तें",
+        footerCookies: "कुकी नीति",
+        footerSecure: "सुरक्षित प्लेटफॉर्म",
+        footerVerified: "सत्यापित विक्रेता",
+        footerCommission: "कम कमीशन"
+      },
+      ta: {
+        tagline: "விற்பனையாளர் போர்டல்",
+        userName: "ரவி குமார்",
+        greeting: "இனிய மாலை வணக்கம், கைவினைஞரே",
+        totalRevenue: "மொத்த வருவாய்",
+        totalOrders: "மொத்த ஆர்டர்கள்",
+        activeProducts: "செயலில் உள்ள தயாரிப்புகள்",
+        avgRating: "சராசரி மதிப்பீடு",
+        recentOrders: "சமீபத்திய ஆர்டர்கள்",
+        viewAll: "அனைத்தையும் காண்க",
+        orderID: "ஆர்டர் ID",
+        customer: "வாடிக்கையாளர்",
+        product: "தயாரிப்பு",
+        date: "தேதி",
+        status: "நிலை",
+        amount: "தொகை",
+        actions: "செயல்கள்",
+        processing: "செயலாக்கம்",
+        completed: "முடிவடைந்தது",
+        pending: "நிலுவையில்",
+        viewBtn: "காண்க",
+        yourProducts: "உங்கள் தயாரிப்புகள்",
+        addProduct: "+ தயாரிப்பு சேர்க்கவும்",
+        product1: "கைநெய்த பழங்குடி கூடை",
+        product2: "மண்பானை செட்",
+        product3: "மூங்கில் பழங்குடி சுவர் கலை",
+        product4: "பாரம்பரிய பழங்குடி மாலை",
+        inStock: "கையிருப்பில்",
+        lowStock: "குறைந்த கையிருப்பு",
+        editBtn: "திருத்து",
+        quickActions: "விரைவான செயல்கள்",
+        actionOrders: "ஆர்டர்களை நிர்வகிக்கவும்",
+        actionOrdersDesc: "ஆர்டர்களைப் பார்க்கவும் செயலாக்கவும்",
+        actionAnalytics: "பகுப்பாய்வு காண்க",
+        actionAnalyticsDesc: "உங்கள் விற்பனை செயல்திறனைக் கண்காணிக்கவும்",
+        actionMessages: "வாடிக்கையாளர் செய்திகள்",
+        actionMessagesDesc: "விசாரணைகளுக்கு பதிலளிக்கவும்",
+        actionSettings: "ஸ்டோர் அமைப்புகள்",
+        actionSettingsDesc: "உங்கள் கடையை கட்டமைக்கவும்"
+      },
+      bn: {
+        tagline: "বিক্রেতা পোর্টাল",
+        userName: "রবি কুমার",
+        greeting: "শুভ সন্ধ্যা, কারিগর",
+        totalRevenue: "মোট রাজস্ব",
+        totalOrders: "মোট অর্ডার",
+        activeProducts: "সক্রিয় পণ্য",
+        avgRating: "গড় রেটিং",
+        recentOrders: "সাম্প্রতিক অর্ডার",
+        viewAll: "সব দেখুন",
+        orderID: "অর্ডার ID",
+        customer: "গ্রাহক",
+        product: "পণ্য",
+        date: "তারিখ",
+        status: "স্থিতি",
+        amount: "পরিমাণ",
+        actions: "কর্ম",
+        processing: "প্রক্রিয়াকরণ",
+        completed: "সম্পন্ন",
+        pending: "মুলতুবি",
+        viewBtn: "দেখুন",
+        yourProducts: "আপনার পণ্য",
+        addProduct: "+ পণ্য যোগ করুন",
+        product1: "হস্তনির্মিত উপজাতি ঝুড়ি",
+        product2: "টেরাকোটা মৃৎশিল্প সেট",
+        product3: "বাঁশের উপজাতি দেয়াল শিল্প",
+        product4: "ঐতিহ্যবাহী উপজাতি হার",
+        inStock: "স্টকে আছে",
+        lowStock: "কম স্টক",
+        editBtn: "সম্পাদনা করুন",
+        quickActions: "দ্রুত কর্ম",
+        actionOrders: "অর্ডার পরিচালনা করুন",
+        actionOrdersDesc: "অর্ডার দেখুন এবং প্রক্রিয়া করুন",
+        actionAnalytics: "বিশ্লেষণ দেখুন",
+        actionAnalyticsDesc: "আপনার বিক্রয় কর্মক্ষমতা ট্র্যাক করুন",
+        actionMessages: "গ্রাহক বার্তা",
+        actionMessagesDesc: "অনুসন্ধানের উত্তর দিন",
+        actionSettings: "স্টোর সেটিংস",
+        actionSettingsDesc: "আপনার দোকান কনফিগার করুন"
+      }
+    };
+
+    let currentLanguage = 'en';
+
+    // Language selector
+    document.getElementById('languageSelector').addEventListener('change', function() {
+      currentLanguage = this.value;
+      updateLanguage();
+    });
+
+    function updateLanguage() {
+      const t = translations[currentLanguage];
+
+      // Update all elements with data-translate attribute
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (t[key]) {
+          element.textContent = t[key];
+        }
+      });
+    }
+
+    // Element SDK Integration
+    async function onConfigChange(config) {
+      const baseFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'Inter, sans-serif';
+      const customFont = `${baseFont}, ${baseFontStack}`;
+      const baseSize = config.font_size || defaultConfig.font_size;
+
+      document.body.style.fontFamily = customFont;
+
+      // Apply colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      document.querySelector('.seller-dashboard').style.background = `linear-gradient(180deg, ${bgColor} 0%, ${config.surface_color || defaultConfig.surface_color} 100%)`;
+      document.querySelector('.top-header').style.background = `rgba(${parseInt(bgColor.slice(1,3), 16)}, ${parseInt(bgColor.slice(3,5), 16)}, ${parseInt(bgColor.slice(5,7), 16)}, 0.95)`;
+
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      document.querySelectorAll('.brand-logo, .luxury-btn.primary').forEach(el => {
+        el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #a08850 100%)`;
+      });
+
+      document.querySelectorAll('.brand-name, .hero-title, .section-title, .metric-value, .product-price, .order-amount').forEach(el => {
+        el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #f4e4c1 50%, ${accentColor} 100%)`;
+        el.style.webkitBackgroundClip = 'text';
+        el.style.webkitTextFillColor = 'transparent';
+        el.style.backgroundClip = 'text';
+      });
+
+      const textColor = config.text_color || defaultConfig.text_color;
+      document.body.style.color = textColor;
+
+      // Apply font sizes
+      document.querySelector('.hero-title').style.fontSize = `${baseSize * 3.5}px`;
+      document.querySelector('.hero-subtitle').style.fontSize = `${baseSize * 1.15}px`;
+
+      // Apply text content
+      document.getElementById('brandName').textContent = config.brand_name || defaultConfig.brand_name;
+      document.getElementById('footerBrandName').textContent = config.brand_name || defaultConfig.brand_name;
+      document.getElementById('welcomeTitle').textContent = config.welcome_title || defaultConfig.welcome_title;
+      document.getElementById('dashboardSubtitle').textContent = config.dashboard_subtitle || defaultConfig.dashboard_subtitle;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["brand_name", config.brand_name || defaultConfig.brand_name],
+        ["welcome_title", config.welcome_title || defaultConfig.welcome_title],
+        ["dashboard_subtitle", config.dashboard_subtitle || defaultConfig.dashboard_subtitle]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a49751835927a1c',t:'MTc2NDE2MDg1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
