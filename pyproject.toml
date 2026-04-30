@@ -1,7 +1,15 @@
 [project]
 name = "adivasi-ecommerce-platform"
 version = "0.1.0"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
+dependencies = [
+    "flask",
+    "flask-cors",
+    "bcrypt",
+    "ibmcloudant",
+    "ibm-cloud-sdk-core",
+    "python-dotenv"
+]
 
 [tool.uv.extra-build-dependencies]
 ibm-cloud-sdk-core = ["setuptools", "wheel"]
