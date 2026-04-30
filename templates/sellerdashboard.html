@@ -1559,370 +1559,219 @@
    </footer>
   </div>
   <script>
-    const defaultConfig = {
-      background_color: "#0a0a0a",
-      accent_color: "#c8b482",
-      surface_color: "#1a1510",
-      text_color: "#e8e6e3",
-      secondary_color: "#8a8578",
-      font_family: "Inter",
-      font_size: 16,
-      brand_name: "Adivasi Heritage",
-      welcome_title: `Welcome Back, ${userData.name.split(' ')[0]}`,
-      dashboard_subtitle: "Manage your crafts, track sales, and grow your artisan business. Your dashboard is ready with today's insights."
+    // 1. Initialize User Data (Backend injection point)
+    const userData = {
+        name: "{{ user_name }}", // Dynamically populated by your backend
+        email: "{{ user_email }}"
     };
 
-    // Multilingual translations
+    // 2. Default Configuration for the SDK
+    const defaultConfig = {
+        background_color: "#0a0a0a",
+        accent_color: "#c8b482",
+        surface_color: "#1a1510",
+        text_color: "#e8e6e3",
+        secondary_color: "#8a8578",
+        font_family: "Inter",
+        font_size: 16,
+        brand_name: "Adivasi Heritage",
+        welcome_title: `Welcome Back, ${userData.name.split(' ')[0]}`,
+        dashboard_subtitle: "Manage your crafts, track sales, and grow your artisan business. Your dashboard is ready with today's insights."
+    };
+
+    // 3. Multilingual translations with dynamic name support
     const translations = {
-      en: {
-  tagline: "Seller Portal",
-  userName: userData.name, // Dynamic value
-  ...
-}
-        greeting: "Good Evening, Artisan",
-        totalRevenue: "Total Revenue",
-        totalOrders: "Total Orders",
-        activeProducts: "Active Products",
-        avgRating: "Average Rating",
-        recentOrders: "Recent Orders",
-        viewAll: "View All",
-        orderID: "Order ID",
-        customer: "Customer",
-        product: "Product",
-        date: "Date",
-        status: "Status",
-        amount: "Amount",
-        actions: "Actions",
-        processing: "Processing",
-        completed: "Completed",
-        pending: "Pending",
-        viewBtn: "View",
-        yourProducts: "Your Products",
-        addProduct: "+ Add Product",
-        product1: "Handwoven Tribal Basket",
-        product2: "Terracotta Pottery Set",
-        product3: "Bamboo Tribal Wall Art",
-        product4: "Heritage Tribal Necklace",
-        inStock: "In Stock",
-        lowStock: "Low Stock",
-        editBtn: "Edit",
-        quickActions: "Quick Actions",
-        actionOrders: "Manage Orders",
-        actionOrdersDesc: "View and process orders",
-        actionAnalytics: "View Analytics",
-        actionAnalyticsDesc: "Track your sales performance",
-        actionMessages: "Customer Messages",
-        actionMessagesDesc: "Respond to inquiries",
-        actionSettings: "Store Settings",
-        actionSettingsDesc: "Configure your shop",
-        footerTagline: "Empowering artisans to share their heritage with the world. Your craftsmanship, our platform.",
-        footerSeller: "Seller Tools",
-        footerDashboard: "Dashboard",
-        footerProducts: "Product Management",
-        footerOrders: "Order Fulfillment",
-        footerAnalytics: "Sales Analytics",
-        footerPayments: "Payments",
-        footerSupport: "Support",
-        footerHelp: "Help Center",
-        footerGuides: "Seller Guides",
-        footerShipping: "Shipping Policies",
-        footerFAQ: "FAQ",
-        footerContact: "Contact Support",
-        footerCommunity: "Community",
-        footerForum: "Artisan Forum",
-        footerStories: "Success Stories",
-        footerWorkshops: "Workshops",
-        footerNetwork: "Network",
-        footerBlog: "Blog",
-        footerCopyright: "© 2024 Adivasi Heritage. All rights reserved.",
-        footerPrivacy: "Privacy Policy",
-        footerTerms: "Seller Terms",
-        footerCookies: "Cookie Policy",
-        footerSecure: "Secure Platform",
-        footerVerified: "Verified Sellers",
-        footerCommission: "Low Commission"
-      },
-      hi: {
-        tagline: "विक्रेता पोर्टल",
-        userName: "रवि कुमार",
-        greeting: "शुभ संध्या, कारीगर",
-        totalRevenue: "कुल राजस्व",
-        totalOrders: "कुल ऑर्डर",
-        activeProducts: "सक्रिय उत्पाद",
-        avgRating: "औसत रेटिंग",
-        recentOrders: "हाल के ऑर्डर",
-        viewAll: "सभी देखें",
-        orderID: "ऑर्डर ID",
-        customer: "ग्राहक",
-        product: "उत्पाद",
-        date: "तारीख",
-        status: "स्थिति",
-        amount: "राशि",
-        actions: "कार्रवाई",
-        processing: "प्रोसेसिंग",
-        completed: "पूर्ण",
-        pending: "लंबित",
-        viewBtn: "देखें",
-        yourProducts: "आपके उत्पाद",
-        addProduct: "+ उत्पाद जोड़ें",
-        product1: "हस्तनिर्मित आदिवासी टोकरी",
-        product2: "टेराकोटा बर्तन सेट",
-        product3: "बांस की आदिवासी दीवार कला",
-        product4: "विरासत आदिवासी हार",
-        inStock: "स्टॉक में",
-        lowStock: "कम स्टॉक",
-        editBtn: "संपादित करें",
-        quickActions: "त्वरित कार्रवाई",
-        actionOrders: "ऑर्डर प्रबंधित करें",
-        actionOrdersDesc: "ऑर्डर देखें और प्रोसेस करें",
-        actionAnalytics: "एनालिटिक्स देखें",
-        actionAnalyticsDesc: "अपनी बिक्री का प्रदर्शन ट्रैक करें",
-        actionMessages: "ग्राहक संदेश",
-        actionMessagesDesc: "पूछताछ का जवाब दें",
-        actionSettings: "स्टोर सेटिंग्स",
-        actionSettingsDesc: "अपनी दुकान कॉन्फ़िगर करें",
-        footerTagline: "कारीगरों को अपनी विरासत को दुनिया के साथ साझा करने के लिए सशक्त बनाना। आपका शिल्प, हमारा मंच।",
-        footerSeller: "विक्रेता उपकरण",
-        footerDashboard: "डैशबोर्ड",
-        footerProducts: "उत्पाद प्रबंधन",
-        footerOrders: "ऑर्डर पूर्ति",
-        footerAnalytics: "बिक्री विश्लेषण",
-        footerPayments: "भुगतान",
-        footerSupport: "सहायता",
-        footerHelp: "सहायता केंद्र",
-        footerGuides: "विक्रेता गाइड",
-        footerShipping: "शिपिंग नीतियां",
-        footerFAQ: "पूछे जाने वाले प्रश्न",
-        footerContact: "सहायता से संपर्क करें",
-        footerCommunity: "समुदाय",
-        footerForum: "कारीगर फोरम",
-        footerStories: "सफलता की कहानियां",
-        footerWorkshops: "कार्यशालाएं",
-        footerNetwork: "नेटवर्क",
-        footerBlog: "ब्लॉग",
-        footerCopyright: "© 2024 आदिवासी विरासत। सर्वाधिकार सुरक्षित।",
-        footerPrivacy: "गोपनीयता नीति",
-        footerTerms: "विक्रेता शर्तें",
-        footerCookies: "कुकी नीति",
-        footerSecure: "सुरक्षित प्लेटफॉर्म",
-        footerVerified: "सत्यापित विक्रेता",
-        footerCommission: "कम कमीशन"
-      },
-      ta: {
-        tagline: "விற்பனையாளர் போர்டல்",
-        userName: "ரவி குமார்",
-        greeting: "இனிய மாலை வணக்கம், கைவினைஞரே",
-        totalRevenue: "மொத்த வருவாய்",
-        totalOrders: "மொத்த ஆர்டர்கள்",
-        activeProducts: "செயலில் உள்ள தயாரிப்புகள்",
-        avgRating: "சராசரி மதிப்பீடு",
-        recentOrders: "சமீபத்திய ஆர்டர்கள்",
-        viewAll: "அனைத்தையும் காண்க",
-        orderID: "ஆர்டர் ID",
-        customer: "வாடிக்கையாளர்",
-        product: "தயாரிப்பு",
-        date: "தேதி",
-        status: "நிலை",
-        amount: "தொகை",
-        actions: "செயல்கள்",
-        processing: "செயலாக்கம்",
-        completed: "முடிவடைந்தது",
-        pending: "நிலுவையில்",
-        viewBtn: "காண்க",
-        yourProducts: "உங்கள் தயாரிப்புகள்",
-        addProduct: "+ தயாரிப்பு சேர்க்கவும்",
-        product1: "கைநெய்த பழங்குடி கூடை",
-        product2: "மண்பானை செட்",
-        product3: "மூங்கில் பழங்குடி சுவர் கலை",
-        product4: "பாரம்பரிய பழங்குடி மாலை",
-        inStock: "கையிருப்பில்",
-        lowStock: "குறைந்த கையிருப்பு",
-        editBtn: "திருத்து",
-        quickActions: "விரைவான செயல்கள்",
-        actionOrders: "ஆர்டர்களை நிர்வகிக்கவும்",
-        actionOrdersDesc: "ஆர்டர்களைப் பார்க்கவும் செயலாக்கவும்",
-        actionAnalytics: "பகுப்பாய்வு காண்க",
-        actionAnalyticsDesc: "உங்கள் விற்பனை செயல்திறனைக் கண்காணிக்கவும்",
-        actionMessages: "வாடிக்கையாளர் செய்திகள்",
-        actionMessagesDesc: "விசாரணைகளுக்கு பதிலளிக்கவும்",
-        actionSettings: "ஸ்டோர் அமைப்புகள்",
-        actionSettingsDesc: "உங்கள் கடையை கட்டமைக்கவும்"
-      },
-      bn: {
-        tagline: "বিক্রেতা পোর্টাল",
-        userName: "রবি কুমার",
-        greeting: "শুভ সন্ধ্যা, কারিগর",
-        totalRevenue: "মোট রাজস্ব",
-        totalOrders: "মোট অর্ডার",
-        activeProducts: "সক্রিয় পণ্য",
-        avgRating: "গড় রেটিং",
-        recentOrders: "সাম্প্রতিক অর্ডার",
-        viewAll: "সব দেখুন",
-        orderID: "অর্ডার ID",
-        customer: "গ্রাহক",
-        product: "পণ্য",
-        date: "তারিখ",
-        status: "স্থিতি",
-        amount: "পরিমাণ",
-        actions: "কর্ম",
-        processing: "প্রক্রিয়াকরণ",
-        completed: "সম্পন্ন",
-        pending: "মুলতুবি",
-        viewBtn: "দেখুন",
-        yourProducts: "আপনার পণ্য",
-        addProduct: "+ পণ্য যোগ করুন",
-        product1: "হস্তনির্মিত উপজাতি ঝুড়ি",
-        product2: "টেরাকোটা মৃৎশিল্প সেট",
-        product3: "বাঁশের উপজাতি দেয়াল শিল্প",
-        product4: "ঐতিহ্যবাহী উপজাতি হার",
-        inStock: "স্টকে আছে",
-        lowStock: "কম স্টক",
-        editBtn: "সম্পাদনা করুন",
-        quickActions: "দ্রুত কর্ম",
-        actionOrders: "অর্ডার পরিচালনা করুন",
-        actionOrdersDesc: "অর্ডার দেখুন এবং প্রক্রিয়া করুন",
-        actionAnalytics: "বিশ্লেষণ দেখুন",
-        actionAnalyticsDesc: "আপনার বিক্রয় কর্মক্ষমতা ট্র্যাক করুন",
-        actionMessages: "গ্রাহক বার্তা",
-        actionMessagesDesc: "অনুসন্ধানের উত্তর দিন",
-        actionSettings: "স্টোর সেটিংস",
-        actionSettingsDesc: "আপনার দোকান কনফিগার করুন"
-      }
+        en: {
+            tagline: "Seller Portal",
+            userName: userData.name,
+            greeting: "Good Evening, Artisan",
+            totalRevenue: "Total Revenue",
+            totalOrders: "Total Orders",
+            activeProducts: "Active Products",
+            avgRating: "Average Rating",
+            recentOrders: "Recent Orders",
+            viewAll: "View All",
+            orderID: "Order ID",
+            customer: "Customer",
+            product: "Product",
+            date: "Date",
+            status: "Status",
+            amount: "Amount",
+            actions: "Actions",
+            processing: "Processing",
+            completed: "Completed",
+            pending: "Pending",
+            viewBtn: "View",
+            yourProducts: "Your Products",
+            addProduct: "+ Add Product",
+            product1: "Handwoven Tribal Basket",
+            product2: "Terracotta Pottery Set",
+            product3: "Bamboo Tribal Wall Art",
+            product4: "Heritage Tribal Necklace",
+            inStock: "In Stock",
+            lowStock: "Low Stock",
+            editBtn: "Edit",
+            quickActions: "Quick Actions",
+            actionOrders: "Manage Orders",
+            actionOrdersDesc: "View and process orders",
+            actionAnalytics: "View Analytics",
+            actionAnalyticsDesc: "Track your sales performance",
+            actionMessages: "Customer Messages",
+            actionMessagesDesc: "Respond to inquiries",
+            actionSettings: "Store Settings",
+            actionSettingsDesc: "Configure your shop",
+            footerTagline: "Empowering artisans to share their heritage with the world.",
+            footerCopyright: "© 2024 Adivasi Heritage. All rights reserved."
+        },
+        hi: {
+            tagline: "विक्रेता पोर्टल",
+            userName: userData.name,
+            greeting: "शुभ संध्या, कारीगर",
+            totalRevenue: "कुल राजस्व",
+            totalOrders: "कुल ऑर्डर",
+            activeProducts: "सक्रिय उत्पाद",
+            avgRating: "औसत रेटिंग",
+            recentOrders: "हाल के ऑर्डर",
+            viewAll: "सभी देखें",
+            orderID: "ऑर्डर ID",
+            customer: "ग्राहक",
+            product: "उत्पाद",
+            date: "तारीख",
+            status: "स्थिति",
+            amount: "राशि",
+            actions: "कार्रवाई",
+            yourProducts: "आपके उत्पाद",
+            addProduct: "+ उत्पाद जोड़ें",
+            editBtn: "संपादित करें",
+            footerCopyright: "© 2024 आदिवासी विरासत। सर्वाधिकार सुरक्षित।"
+        },
+        ta: {
+            tagline: "விற்பனையாளர் போர்டல்",
+            userName: userData.name,
+            greeting: "இனிய மாலை வணக்கம், கைவினைஞரே",
+            totalRevenue: "மொத்த வருவாய்",
+            totalOrders: "மொத்த ஆர்டர்கள்",
+            yourProducts: "உங்கள் தயாரிப்புகள்",
+            addProduct: "+ தயாரிப்பு சேர்க்கவும்",
+            editBtn: "திருத்து"
+        },
+        bn: {
+            tagline: "বিক্রেতা পোর্টাল",
+            userName: userData.name,
+            greeting: "শুভ সন্ধ্যা, কারিগর",
+            totalRevenue: "মোট রাজস্ব",
+            totalOrders: "মোট অর্ডার",
+            yourProducts: "আপনার পণ্য",
+            addProduct: "+ পণ্য যোগ করুন",
+            editBtn: "সম্পাদনা করুন"
+        }
     };
 
     let currentLanguage = 'en';
 
-    // Language selector
+    // 4. Update the Welcome Section (Name and Initials)
+    function updateUserWelcome() {
+        const firstName = userData.name.split(' ')[0];
+        const welcomeTitle = document.getElementById('welcomeTitle');
+        const navUserName = document.getElementById('navUserName');
+        const userInitials = document.getElementById('userInitials');
+
+        if (welcomeTitle) welcomeTitle.textContent = `Welcome Back, ${firstName}`;
+        if (navUserName) navUserName.textContent = userData.name;
+        if (userInitials) {
+            const initials = userData.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            userInitials.textContent = initials;
+        }
+    }
+
+    // 5. Language Handling
     document.getElementById('languageSelector').addEventListener('change', function() {
-      currentLanguage = this.value;
-      updateLanguage();
+        currentLanguage = this.value;
+        updateLanguage();
     });
 
     function updateLanguage() {
-      const t = translations[currentLanguage];
-
-      // Update all elements with data-translate attribute
-      document.querySelectorAll('[data-translate]').forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (t[key]) {
-          element.textContent = t[key];
-        }
-      });
+        const t = translations[currentLanguage];
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (t[key]) {
+                element.textContent = t[key];
+            }
+        });
+        // Always refresh the personalized welcome after language change
+        updateUserWelcome(); 
     }
 
-    // Element SDK Integration
+    // 6. Element SDK Integration
     async function onConfigChange(config) {
-      const baseFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = 'Inter, sans-serif';
-      const customFont = `${baseFont}, ${baseFontStack}`;
-      const baseSize = config.font_size || defaultConfig.font_size;
+        const baseFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = 'Inter, sans-serif';
+        const customFont = `${baseFont}, ${baseFontStack}`;
+        const baseSize = config.font_size || defaultConfig.font_size;
 
-      document.body.style.fontFamily = customFont;
+        document.body.style.fontFamily = customFont;
 
-      // Apply colors
-      const bgColor = config.background_color || defaultConfig.background_color;
-      document.querySelector('.seller-dashboard').style.background = `linear-gradient(180deg, ${bgColor} 0%, ${config.surface_color || defaultConfig.surface_color} 100%)`;
-      document.querySelector('.top-header').style.background = `rgba(${parseInt(bgColor.slice(1,3), 16)}, ${parseInt(bgColor.slice(3,5), 16)}, ${parseInt(bgColor.slice(5,7), 16)}, 0.95)`;
+        // Apply colors
+        const bgColor = config.background_color || defaultConfig.background_color;
+        const surfaceColor = config.surface_color || defaultConfig.surface_color;
+        document.querySelector('.seller-dashboard').style.background = `linear-gradient(180deg, ${bgColor} 0%, ${surfaceColor} 100%)`;
 
-      const accentColor = config.accent_color || defaultConfig.accent_color;
-      document.querySelectorAll('.brand-logo, .luxury-btn.primary').forEach(el => {
-        el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #a08850 100%)`;
-      });
+        const accentColor = config.accent_color || defaultConfig.accent_color;
+        document.querySelectorAll('.brand-logo, .luxury-btn.primary').forEach(el => {
+            el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #a08850 100%)`;
+        });
 
-      document.querySelectorAll('.brand-name, .hero-title, .section-title, .metric-value, .product-price, .order-amount').forEach(el => {
-        el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #f4e4c1 50%, ${accentColor} 100%)`;
-        el.style.webkitBackgroundClip = 'text';
-        el.style.webkitTextFillColor = 'transparent';
-        el.style.backgroundClip = 'text';
-      });
+        document.querySelectorAll('.brand-name, .hero-title, .section-title, .metric-value').forEach(el => {
+            el.style.background = `linear-gradient(135deg, ${accentColor} 0%, #f4e4c1 50%, ${accentColor} 100%)`;
+            el.style.webkitBackgroundClip = 'text';
+            el.style.webkitTextFillColor = 'transparent';
+        });
 
-      const textColor = config.text_color || defaultConfig.text_color;
-      document.body.style.color = textColor;
+        const textColor = config.text_color || defaultConfig.text_color;
+        document.body.style.color = textColor;
 
-      // Apply font sizes
-      document.querySelector('.hero-title').style.fontSize = `${baseSize * 3.5}px`;
-      document.querySelector('.hero-subtitle').style.fontSize = `${baseSize * 1.15}px`;
-
-      // Apply text content
-      document.getElementById('brandName').textContent = config.brand_name || defaultConfig.brand_name;
-      document.getElementById('footerBrandName').textContent = config.brand_name || defaultConfig.brand_name;
-      document.getElementById('welcomeTitle').textContent = config.welcome_title || defaultConfig.welcome_title;
-      document.getElementById('dashboardSubtitle').textContent = config.dashboard_subtitle || defaultConfig.dashboard_subtitle;
+        // Apply text content from SDK
+        document.getElementById('brandName').textContent = config.brand_name || defaultConfig.brand_name;
+        document.getElementById('welcomeTitle').textContent = config.welcome_title || defaultConfig.welcome_title;
+        document.getElementById('dashboardSubtitle').textContent = config.dashboard_subtitle || defaultConfig.dashboard_subtitle;
+        
+        // Ensure initials and nav name stay synced
+        updateUserWelcome();
     }
 
     function mapToCapabilities(config) {
-      return {
-        recolorables: [
-          {
-            get: () => config.background_color || defaultConfig.background_color,
-            set: (value) => {
-              config.background_color = value;
-              window.elementSdk.setConfig({ background_color: value });
-            }
-          },
-          {
-            get: () => config.accent_color || defaultConfig.accent_color,
-            set: (value) => {
-              config.accent_color = value;
-              window.elementSdk.setConfig({ accent_color: value });
-            }
-          },
-          {
-            get: () => config.surface_color || defaultConfig.surface_color,
-            set: (value) => {
-              config.surface_color = value;
-              window.elementSdk.setConfig({ surface_color: value });
-            }
-          },
-          {
-            get: () => config.text_color || defaultConfig.text_color,
-            set: (value) => {
-              config.text_color = value;
-              window.elementSdk.setConfig({ text_color: value });
-            }
-          },
-          {
-            get: () => config.secondary_color || defaultConfig.secondary_color,
-            set: (value) => {
-              config.secondary_color = value;
-              window.elementSdk.setConfig({ secondary_color: value });
-            }
-          }
-        ],
-        borderables: [],
-        fontEditable: {
-          get: () => config.font_family || defaultConfig.font_family,
-          set: (value) => {
-            config.font_family = value;
-            window.elementSdk.setConfig({ font_family: value });
-          }
-        },
-        fontSizeable: {
-          get: () => config.font_size || defaultConfig.font_size,
-          set: (value) => {
-            config.font_size = value;
-            window.elementSdk.setConfig({ font_size: value });
-          }
-        }
-      };
+        return {
+            recolorables: [
+                { get: () => config.background_color || defaultConfig.background_color, set: (v) => window.elementSdk.setConfig({ background_color: v }) },
+                { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => window.elementSdk.setConfig({ accent_color: v }) },
+                { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => window.elementSdk.setConfig({ surface_color: v }) },
+                { get: () => config.text_color || defaultConfig.text_color, set: (v) => window.elementSdk.setConfig({ text_color: v }) }
+            ],
+            fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => window.elementSdk.setConfig({ font_family: v }) },
+            fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => window.elementSdk.setConfig({ font_size: v }) }
+        };
     }
 
     function mapToEditPanelValues(config) {
-      return new Map([
-        ["brand_name", config.brand_name || defaultConfig.brand_name],
-        ["welcome_title", config.welcome_title || defaultConfig.welcome_title],
-        ["dashboard_subtitle", config.dashboard_subtitle || defaultConfig.dashboard_subtitle]
-      ]);
+        return new Map([
+            ["brand_name", config.brand_name || defaultConfig.brand_name],
+            ["welcome_title", config.welcome_title || defaultConfig.welcome_title],
+            ["dashboard_subtitle", config.dashboard_subtitle || defaultConfig.dashboard_subtitle]
+        ]);
     }
 
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
-      });
-    }
-  </script>
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+        updateUserWelcome();
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    });
+</script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a49751835927a1c',t:'MTc2NDE2MDg1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
