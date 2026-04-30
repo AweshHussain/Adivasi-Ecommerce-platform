@@ -1162,9 +1162,8 @@
       🔔 <span class="notification-badge">8</span>
      </div>
      <div class="user-profile-btn">
-      <div class="user-avatar">
-       RK
-      </div><span class="user-name" data-translate="userName">Ravi Kumar</span>
+      <div class="user-avatar">{{ user_name[0] }}{{ user_name.split(' ')[-1][0] if ' ' in user_name else '' }}</div>
+        <span class="user-name">{{ user_name }}</span>
      </div>
     </div>
    </header><!-- Main Dashboard Content -->
