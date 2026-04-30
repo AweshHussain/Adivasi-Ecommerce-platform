@@ -2,6 +2,9 @@
 
 📊 Empowering tribal artisans through a digital marketplace for handcrafted products  
 
+## 🌐 Live Demo  
+👉 https://aweshhussain-adivasi-ecommerce-plat.vercel.app/
+
 ## 📌 Overview  
 **Adivasi Market** is a full-stack e-commerce platform developed as a semester project to support Adivasi and backward-class artisans. It provides a digital space to showcase and sell handcrafted products while promoting cultural preservation and inclusive digital participation.
 
