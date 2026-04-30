@@ -1568,15 +1568,17 @@
       font_family: "Inter",
       font_size: 16,
       brand_name: "Adivasi Heritage",
-      welcome_title: "Welcome Back, Ravi",
+      welcome_title: `Welcome Back, ${userData.name.split(' ')[0]}`,
       dashboard_subtitle: "Manage your crafts, track sales, and grow your artisan business. Your dashboard is ready with today's insights."
     };
 
     // Multilingual translations
     const translations = {
       en: {
-        tagline: "Seller Portal",
-        userName: "Ravi Kumar",
+  tagline: "Seller Portal",
+  userName: userData.name, // Dynamic value
+  ...
+}
         greeting: "Good Evening, Artisan",
         totalRevenue: "Total Revenue",
         totalOrders: "Total Orders",
