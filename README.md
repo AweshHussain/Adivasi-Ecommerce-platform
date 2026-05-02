@@ -31,8 +31,8 @@ The platform focuses on:
 
 ### 🛒 E-commerce Marketplace  
 - Product listings with price details  
-- High-quality images with 360° preview *(if implemented)*  
-- Wishlist and buy options  
+- High-quality product images  
+- Wishlist and purchase options  
 
 ### 👨‍🎨 Artisan Profiles  
 - Dedicated profiles for each artisan  
@@ -98,11 +98,29 @@ To leverage technology for empowering tribal artisans by providing them with a d
 ---
 
 ## ⚠️ Note  
-Many advanced features are currently under development. Future updates will include authentication systems for verifying product originality and enhancing user trust.
+Many advanced features are currently under development. Future updates will include authentication systems for verifying product originality, enhancing trust, and improving overall user experience.
+
+---
+
+## 👨‍💻 Team Members  
+
+### 🚀 Project Team  
+
+| Name | Role | GitHub | LinkedIn |
+|------|------|--------|----------|
+| **Awesh Hussain** | Project Lead, Full Stack Developement & Platform Integration | [GitHub](https://github.com/AweshHussain) | [LinkedIn]((https://www.linkedin.com/in/awesh06/)) |
+| **SM Zaid Iqbal** | Front-End Developer  | [GitHub]((https://github.com/Zaid007-dev)) | [LinkedIn](www.linkedin.com/in/syed-mohammad-zaid-iqbal-08553b325) |
+| **Minhaj Hussain** | Database & Cloud Management (IBM Cloudant) | [GitHub](https://github.com/member3-github) | [LinkedIn](https://linkedin.com/in/member3-linkedin) |
+| **Muntassar Rehan** | Research, Testing & Documentation | [GitHub](https://github.com/member4-github) | [LinkedIn](https://linkedin.com/in/member4-linkedin) |
+
+---
+
+### 🌟 Team Collaboration  
+This project was developed through collaborative teamwork, combining expertise in frontend development, backend engineering, database management, cloud deployment, research, and documentation to build a meaningful digital marketplace that empowers tribal artisans and promotes cultural heritage.
 
 ---
 
 ## 👨‍💻 Author  
 
 **Awesh Hussain**  
-GitHub: https://github.com/AweshHussain  
+GitHub: https://github.com/AweshHussain
