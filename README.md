@@ -110,8 +110,8 @@ Many advanced features are currently under development. Future updates will incl
 |------|------|--------|----------|
 | **Awesh Hussain** | Project Lead, Full Stack Developement & Platform Integration | [GitHub](https://github.com/AweshHussain) | [LinkedIn](https://www.linkedin.com/in/awesh06/)|
 | **SM Zaid Iqbal** | Front-End Developer  | [GitHub](https://github.com/Zaid007-dev) | [LinkedIn](www.linkedin.com/in/syed-mohammad-zaid-iqbal-08553b325) |
-| **Minhaj Hussain** | Database & Cloud Management (IBM Cloudant) | [GitHub](https://github.com/member3-github) | [LinkedIn](https://linkedin.com/in/member3-linkedin) |
-| **Muntassar Rehan** | Research, Testing & Documentation | [GitHub](https://github.com/member4-github) | [LinkedIn](https://linkedin.com/in/member4-linkedin) |
+| **Minhaj Hussain** | Database & Cloud Management (IBM Cloudant) | [GitHub](https://github.com/member3-git) | [LinkedIn](https://www.linkedin.com/in/minhaj-hussain-64b8b9328/) |
+| **Muntassar Rehan** | Research, Testing & Documentation | [GitHub](https://github.com/member4-git) | [LinkedIn](https://www.linkedin.com/in/muntassar-rehan-696078328/) |
 
 ---
 
